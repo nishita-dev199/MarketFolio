@@ -14,12 +14,12 @@ const caseStudies = [
   },
   {
     tag: "SaaS · Full-Funnel Growth",
-    company: "Stackify HQ",
+    company: "Stackify HX",
     challenge: "High trial signups but only 9% trial-to-paid conversion. CAC was 4× industry benchmark.",
     result: "Redesigned paid acquisition funnels, built nurture sequences tied to behavior triggers, and A/B tested variants.",
     metrics: [
       { value: "31%", label: "Trial-to-paid rate" },
-      { value: "$1.2M", label: "ARR added in 90 days" },
+      { value: "₹12L", label: "ARR added in 90 days" },
     ],
   },
   {
