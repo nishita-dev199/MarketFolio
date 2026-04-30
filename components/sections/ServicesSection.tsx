@@ -75,17 +75,28 @@ const services = [
   },
 ];
 
-export default function ServicesSection() {
+export default function ServicesSection({ darkVariant = false }: { darkVariant?: boolean }) {
   return (
-    <section id="services" className="w-full mt-20 py-32 px-6 flex flex-col items-center bg-zinc-50">
+    <section 
+      id="services" 
+      className={`w-full mt-20 py-32 px-6 flex flex-col items-center ${darkVariant ? 'bg-black' : 'bg-zinc-50'}`}
+    >
       <div className="max-w-7xl w-full flex flex-col items-center">
-        <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-zinc-200 bg-white text-xs font-bold uppercase tracking-widest text-zinc-500 mb-6">
+        <div className={`inline-flex items-center gap-2 px-5 py-2 rounded-full border text-xs font-bold uppercase tracking-widest mb-6 ${
+          darkVariant 
+          ? 'border-white/10 bg-white/5 text-zinc-400' 
+          : 'border-zinc-200 bg-white text-zinc-500'
+        }`}>
           What We Do
         </div>
-        <h2 className="text-4xl md:text-5xl font-black tracking-tighter text-black mb-4 text-center">
+        <h2 className={`text-4xl md:text-5xl font-medium tracking-tighter mb-4 text-center ${
+          darkVariant ? 'text-white' : 'text-black'
+        }`}>
           Built to Win, Not Just Look Good
         </h2>
-        <p className="text-lg text-zinc-500 mb-20 max-w-2xl text-center font-medium">
+        <p className={`text-lg mb-20 max-w-2xl text-center font-medium ${
+          darkVariant ? 'text-zinc-400' : 'text-zinc-500'
+        }`}>
           Every service we offer is measured by one metric: revenue generated for your business. No vanity KPIs, no fluff.
         </p>
 
@@ -115,4 +126,4 @@ export default function ServicesSection() {
       </div>
     </section>
   );
-}
+}
