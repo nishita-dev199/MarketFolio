@@ -77,10 +77,6 @@ export default function TeamSection() {
               
               {/* Overlay for Name and Designation */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-8 transition-all duration-500 group-hover:from-black/100">
-                <div className="flex items-center gap-4 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                   <FaLinkedin className="text-white text-xl hover:scale-120 transition-transform" />
-                   <FaTwitter className="text-white text-xl hover:scale-120 transition-transform" />
-                </div>
                 <h3 className="text-2xl font-medium text-white mb-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                   {member.name}
                 </h3>
