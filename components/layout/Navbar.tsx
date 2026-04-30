@@ -14,9 +14,10 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex gap-2 font-medium">
+          <Link href="/" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all">Home</Link>
           <Link href="/#services" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all">Services</Link>
-          <Link href="/#about" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all">About Us</Link>
-          <Link href="/#services" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all">Services</Link>
+          <Link href="/about" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all">About Us</Link>
+          <Link href="/#case-studies" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all">Case Studies</Link>
           <Link href="/#contact" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all">Contact</Link>
         </nav>
 
@@ -41,6 +42,13 @@ export default function Navbar() {
         {/* Mobile Menu Overlay */}
         <div className={`fixed inset-0 bg-white z-40 flex flex-col items-center justify-center gap-8 transition-all duration-500 md:hidden ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
           <nav className="flex flex-col items-center gap-6">
+             <Link 
+              href="/" 
+              onClick={() => setIsOpen(false)}
+              className="text-3xl font-black text-zinc-400 hover:text-black transition-colors"
+            >
+              Home
+            </Link>
             <Link 
               href="/#services" 
               onClick={() => setIsOpen(false)}
@@ -49,7 +57,7 @@ export default function Navbar() {
               Services
             </Link>
             <Link 
-              href="/#about" 
+              href="/about" 
               onClick={() => setIsOpen(false)}
               className="text-3xl font-black text-zinc-400 hover:text-black transition-colors"
             >
