@@ -24,7 +24,7 @@ export default function Footer() {
 
         <div className="flex flex-col items-center md:items-start gap-4">
           <h3 className="font-semibold text-lg">Company</h3>
-          <Link href="/#about" className="text-zinc-400 hover:text-white transition-colors text-sm">About Us</Link>
+          <Link href="/about" className="text-zinc-400 hover:text-white transition-colors text-sm">About Us</Link>
           <Link href="/#process" className="text-zinc-400 hover:text-white transition-colors text-sm">Our Process</Link>
           <Link href="/#case-studies" className="text-zinc-400 hover:text-white transition-colors text-sm">Case Studies</Link>
           <Link href="/#contact" className="text-zinc-400 hover:text-white transition-colors text-sm">Contact Us</Link>

@@ -74,13 +74,13 @@ export default function CtaSection() {
 
   return (
     <section id="contact" className="w-full py-32 px-6 flex flex-col items-center mb-10">
+      <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-zinc-200 bg-white text-xs font-bold uppercase tracking-widest text-zinc-500 mb-12">
+        Contact Us
+      </div>
       <div className="max-w-7xl w-full float-dark rounded-[3rem] p-8 md:p-16 bg-black teardrop-border flex flex-col md:flex-row gap-16">
         
         {/* Left Side: Form */}
         <div className="flex-1">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-zinc-700 text-xs font-bold uppercase tracking-widest text-zinc-400 mb-8">
-            Get in touch
-          </div>
           <h2 className="text-5xl font-black tracking-tighter text-white mb-8 leading-tight">
             Let&apos;s Scale Your Revenue.
           </h2>
