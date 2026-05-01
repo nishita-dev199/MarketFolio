@@ -26,7 +26,6 @@ export default function Home() {
             }}
           >
             {/* The earth image */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/half_earth.jpg"
               alt=""
