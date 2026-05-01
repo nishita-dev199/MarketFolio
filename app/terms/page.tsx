@@ -7,7 +7,9 @@ export const metadata = {
 
 export default function TermsConditionsPage() {
   return (
-    <div className="w-full min-h-screen bg-black">
+    <>
+    <div className="fixed inset-0 bg-black -z-10"></div>
+    <div className="w-full min-h-screen bg-black ">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pt-16 pb-20 flex flex-col lg:flex-row gap-16 lg:gap-24">
         
         {/* Left Side */}
@@ -89,5 +91,6 @@ export default function TermsConditionsPage() {
         </div>
       </div>
     </div>
+  </>
   );
 }
