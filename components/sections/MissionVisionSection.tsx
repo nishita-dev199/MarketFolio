@@ -36,7 +36,7 @@ export default function MissionVisionSection() {
           {/* Triangle */}
           <div className="absolute -right-24 top-1/2 -translate-y-1/2 w-[500px] h-[500px] md:w-[700px] md:h-[700px] opacity-100 rotate-12 pointer-events-none z-0">
             <svg viewBox="0 0 100 100" className="w-full h-full text-zinc-200 fill-current drop-shadow-md">
-              <path d="M50 10 L90 85 Q92 90 85 90 L15 90 Q8 90 10 85 L50 10 Z" />
+              <path d="M55 18 L90 85 Q92 90 85 90 L15 90 Q8 90 10 85 L45 18 Q50 8 55 18 Z" />
             </svg>
           </div>
         </div>
@@ -74,7 +74,7 @@ export default function MissionVisionSection() {
           {/* Triangle */}
           <div className="absolute -left-24 top-1/2 -translate-y-1/2 w-[500px] h-[500px] md:w-[700px] md:h-[700px] opacity-100 -rotate-12 pointer-events-none z-0">
             <svg viewBox="0 0 100 100" className="w-full h-full text-zinc-200 fill-current drop-shadow-md">
-              <path d="M50 10 L90 85 Q92 90 85 90 L15 90 Q8 90 10 85 L50 10 Z" />
+              <path d="M55 18 L90 85 Q92 90 85 90 L15 90 Q8 90 10 85 L45 18 Q50 8 55 18 Z" />
             </svg>
           </div>
         </div>
