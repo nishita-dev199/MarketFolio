@@ -28,7 +28,7 @@ export default function ParallaxSection({ imageUrl }: { imageUrl: string }) {
   return (
     <section 
       ref={sectionRef}
-      className="w-full aspect-[21/9] md:aspect-[2.4/1] relative overflow-hidden flex items-center justify-center bg-black"
+      className="w-full aspect-[3/4] md:aspect-[2.4/1] relative overflow-hidden flex items-center justify-center bg-black"
     >
       <div
         className="absolute inset-0 bg-center bg-cover scale-110"

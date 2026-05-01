@@ -184,7 +184,7 @@ export default function CtaSection() {
             <h4 className="text-xs font-bold uppercase text-zinc-500 mb-4 tracking-widest">Direct Contact</h4>
             <div className="space-y-4">
               <p className="text-lg text-white font-medium hover:text-zinc-300 transition-colors">
-                <a href="mailto:evanderfirm@gmail.com">evanderfirm@gmail.com</a>
+                <a href="mailto:evanderfirm@gmail.com">contact@evanderdigital.com</a>
               </p>
               <p className="text-lg text-white font-medium hover:text-zinc-300 transition-colors">
                 <a href="tel:+918438423994">+91 84384 23994</a>
