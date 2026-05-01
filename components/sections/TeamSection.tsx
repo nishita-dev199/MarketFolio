@@ -9,7 +9,7 @@ const team = [
    {
     name: "Bhaveena P. B.",
     role: "Digital Marketing Manager",
-    image: "/team/bhaveena.jpeg",
+    image: "/team/Bhaveena.jpeg",
   },
    {
     name: "Khushi Bajpai",
@@ -24,7 +24,7 @@ const team = [
    {
     name: "Josna Joshy",
     role: "SEO Executive",
-    image: "/team/josna.png",
+    image: "/team/Josna.png",
   },
   {
     name: "Jitisha Bhutani",
