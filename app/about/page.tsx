@@ -3,6 +3,12 @@ import TeamSection from "@/components/sections/TeamSection";
 import CtaSection from "@/components/sections/CtaSection";
 import WhyChooseSection from "@/components/sections/WhyChooseSection";
 import ServicesSection from "@/components/sections/ServicesSection";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Us | Our Mission & Team",
+  description: "Learn about Evander Digital's mission to empower businesses through data-driven performance marketing. Meet the architects behind our scalable growth systems.",
+};
 
 export default function AboutPage() {
   return (
