@@ -138,7 +138,7 @@ export default function Home() {
         <ServicesSection />
 
         {/* Parallax Section */}
-        <ParallaxSection imageUrl="/marketing.jpg" />
+        <ParallaxSection imageUrl="/marketing.png" />
 
         {/* Process Section */}
         <ProcessSection />
