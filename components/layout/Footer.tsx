@@ -35,7 +35,7 @@ export default function Footer() {
           <h3 className="font-semibold text-lg">Get in Touch</h3>
           <p className="text-zinc-400 text-sm text-center md:text-left">Ready to scale your business? Let&apos;s engineer your next growth phase.</p>
           <button className="bg-white text-black px-6 py-2.5 rounded-full font-bold hover:scale-105 hover:shadow-[0_20px_40px_-12px_rgba(255,255,255,0.2)] transition-all w-fit mt-2">
-            <a href="/#contact"> Free Consultation </a>
+            <a href="mailto:evanderfirm@gmail.com"> contact@evanderdigital.com </a>
           </button>
         </div>
       </div>
