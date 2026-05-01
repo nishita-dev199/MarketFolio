@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FaInstagram, FaLinkedin } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -39,11 +40,23 @@ export default function Footer() {
         </div>
       </div>
       
-      <div className="mx-auto max-w-7xl px-6 mt-16 pt-8 border-t border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
+      <div className="mx-auto max-w-7xl px-6 mt-16 pt-8 border-t border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-zinc-500">
         <p>&copy; {new Date().getFullYear()} Evander Digital Marketing. All rights reserved.</p>
-        <div className="flex gap-6">
-          <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-          <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+        
+        <div className="flex items-center gap-8">
+          <div className="flex gap-6 items-center">
+            <a href="https://www.instagram.com/evanderdigital?igsh=MXR0andzNjd5MHIyOQ==" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors">
+              <FaInstagram className="w-5 h-5" />
+            </a>
+            <a href="https://www.linkedin.com/company/evander-digital-marketing/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors">
+              <FaLinkedin className="w-5 h-5" />
+            </a>
+          </div>
+          <div className="h-4 w-[1px] bg-zinc-800 hidden md:block"></div>
+          <div className="flex gap-6">
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+          </div>
         </div>
       </div>
     </footer>
