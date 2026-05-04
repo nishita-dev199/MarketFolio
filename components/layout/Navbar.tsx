@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,21 +10,28 @@ export default function Navbar() {
     <header className="w-full sticky top-0 z-50 pt-6 px-4 pb-2 bg-transparent">
       <div className="mx-auto max-w-7xl px-4 md:px-8 py-4 flex items-center justify-between float-md rounded-full bg-white teardrop-border relative">
         <Link href="/" className="text-2xl font-black tracking-tighter text-black z-50 w-32">
-         <img src="/white_logo_crp.jpeg" alt="Logo" className="h-8 md:h-10 w-auto" />
+          <Image
+            src="/white_logo_crp.jpeg"
+            alt="Logo"
+            width={200}
+            height={80}
+            className="h-8 md:h-10 w-auto"
+            priority
+          />
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex gap-2 font-medium">
           <Link href="/" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all">Home</Link>
-          <Link href="/#services" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all">Services</Link>
+          <Link href="/services" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all">Services</Link>
+          <Link href="/blog" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all">Blog</Link>
           <Link href="/about" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all">About Us</Link>
-          <Link href="/#case-studies" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all">Case Studies</Link>
           <Link href="/#contact" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all">Contact</Link>
         </nav>
 
         {/* Desktop CTA */}
         <button className="hidden md:block float-dark px-8 py-3 rounded-full font-bold hover:-translate-y-1 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] transition-all text-sm tracking-wide">
-          <a href="/#contact">Free Consultation</a>
+          <Link href="/#contact">Free Consultation</Link>
         </button>
 
         {/* Hamburger Button */}
@@ -50,11 +58,18 @@ export default function Navbar() {
               Home
             </Link>
             <Link 
-              href="/#services" 
+              href="/services" 
               onClick={() => setIsOpen(false)}
               className="text-3xl font-black text-zinc-400 hover:text-black transition-colors"
             >
               Services
+            </Link>
+            <Link 
+              href="/blog" 
+              onClick={() => setIsOpen(false)}
+              className="text-3xl font-black text-zinc-400 hover:text-black transition-colors"
+            >
+              Blog
             </Link>
             <Link 
               href="/about" 
@@ -82,7 +97,7 @@ export default function Navbar() {
             onClick={() => setIsOpen(false)}
             className="float-dark px-10 py-4 rounded-full font-bold text-lg mt-4"
           >
-            <a href="/#contact">Free Consultation</a>
+            <Link href="/#contact">Free Consultation</Link>
           </button>
         </div>
       </div>

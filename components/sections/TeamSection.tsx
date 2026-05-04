@@ -1,4 +1,3 @@
-import { FaLinkedin, FaTwitter } from "react-icons/fa";
 
 const team = [
   {
@@ -6,25 +5,35 @@ const team = [
     role: "CEO's Executive Assistant",
     image: "/team/Tanushree.jpeg",
   },
-   {
+  {
     name: "Bhaveena P. B.",
     role: "Digital Marketing Manager",
     image: "/team/Bhaveena.jpeg",
   },
-   {
+  {
     name: "Khushi Bajpai",
     role: "Social Media Manager",
     image: "/team/khushi.jpeg",
   },
-   {
+  {
     name: "Nishita Namdeo",
     role: "Web Developer",
     image: "/team/nishita.png",
   },
-   {
+  {
+    name: "Ritika Srivastava",
+    role: "Web Developer",
+    image: "/team/ritika.jpeg",
+  },
+  {
     name: "Josna Joshy",
     role: "SEO Executive",
     image: "/team/Josna.png",
+  },
+  {
+    name: "Riti Shah",
+    role: "Business Development Executive",
+    image: "/team/riti.png",
   },
   {
     name: "Jitisha Bhutani",
@@ -37,6 +46,11 @@ const team = [
     image: "/team/mehuli.jpeg",
   },
   {
+    name: "Chandni Jha",
+    role: "CRM Executive",
+    image: "/team/chandni.jpeg",
+  },
+  {
     name: "Samuel",
     role: "Performance Marketing Executive",
     image: "/team/samuel.jpeg",
@@ -45,6 +59,11 @@ const team = [
     name: "Adithi H.",
     role: "Graphic Designer",
     image: "/team/adithi.png",
+  },
+  {
+    name: "Kesavarajaguru G. K.",
+    role: "Video Editor",
+    image: "/team/KRG.jpeg",
   },
 ];
 
