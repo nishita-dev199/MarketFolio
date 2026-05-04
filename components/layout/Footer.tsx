@@ -1,14 +1,22 @@
 import Link from "next/link";
+import Image from "next/image";
 import { FaInstagram, FaLinkedin } from "react-icons/fa";
 
 export default function Footer() {
   return (
     <footer className="w-full bg-black text-white py-16 mt-auto relative">
-      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-zinc-800 to-transparent"></div>
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent"></div>
       <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
         <div className="flex flex-col items-center md:items-start gap-4 md:col-span-1">
           <Link href="/" className="text-2xl font-black tracking-tighter text-white">
-            <img src="/black_logo_crp.png" alt="Logo" className="h-12 md:h-16 w-auto" />
+            <Image
+              src="/black_logo_crp.png"
+              alt="Logo"
+              width={240}
+              height={96}
+              className="h-12 md:h-16 w-auto"
+              priority
+            />
           </Link>
           <p className="text-zinc-400 text-sm leading-relaxed text-center md:text-left">
             We engineer high-performance marketing systems that turn cold traffic into compounding revenue through data-driven growth strategies.
@@ -17,17 +25,18 @@ export default function Footer() {
         
         <div className="flex flex-col items-center md:items-start gap-4">
           <h3 className="font-semibold text-lg">Services</h3>
-          <Link href="/#services" className="text-zinc-400 hover:text-white transition-colors text-sm">Performance Marketing</Link>
-          <Link href="/#services" className="text-zinc-400 hover:text-white transition-colors text-sm">SEO & Organic Growth</Link>
-          <Link href="/#services" className="text-zinc-400 hover:text-white transition-colors text-sm">Funnel Optimization</Link>
-          <Link href="/#services" className="text-zinc-400 hover:text-white transition-colors text-sm">Data-Driven Analytics</Link>
+          <Link href="/services/performance-marketing" className="text-zinc-400 hover:text-white transition-colors text-sm">Performance Marketing</Link>
+          <Link href="/services/seo-organic-growth" className="text-zinc-400 hover:text-white transition-colors text-sm">SEO & Organic Growth</Link>
+          <Link href="/services/funnel-based-approach" className="text-zinc-400 hover:text-white transition-colors text-sm">Funnel Strategy</Link>
+          <Link href="/services/data-driven-decision-making" className="text-zinc-400 hover:text-white transition-colors text-sm">Analytics & Reporting</Link>
+          <Link href="/services" className="text-zinc-400 hover:text-white transition-colors text-sm font-semibold">All services →</Link>
         </div>
 
         <div className="flex flex-col items-center md:items-start gap-4">
           <h3 className="font-semibold text-lg">Company</h3>
           <Link href="/about" className="text-zinc-400 hover:text-white transition-colors text-sm">About Us</Link>
+          <Link href="/blog" className="text-zinc-400 hover:text-white transition-colors text-sm">Blog</Link>
           <Link href="/#process" className="text-zinc-400 hover:text-white transition-colors text-sm">Our Process</Link>
-          <Link href="/#case-studies" className="text-zinc-400 hover:text-white transition-colors text-sm">Case Studies</Link>
           <Link href="/#contact" className="text-zinc-400 hover:text-white transition-colors text-sm">Contact Us</Link>
         </div>
 
@@ -52,7 +61,7 @@ export default function Footer() {
               <FaLinkedin className="w-5 h-5" />
             </a>
           </div>
-          <div className="h-4 w-[1px] bg-zinc-800 hidden md:block"></div>
+          <div className="h-4 w-px bg-zinc-800 hidden md:block"></div>
           <div className="flex gap-6">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
