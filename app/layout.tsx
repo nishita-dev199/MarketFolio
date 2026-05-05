@@ -3,8 +3,6 @@ import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 
 const GTM_ID = "GTM-W244STHT";
 
@@ -63,6 +61,9 @@ export const metadata: Metadata = {
   },
 };
 
+import ConditionalHeader from "@/components/layout/ConditionalHeader";
+import ConditionalFooter from "@/components/layout/ConditionalFooter";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -104,9 +105,9 @@ export default function RootLayout({
             boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
           },
         }} />
-        <Navbar />
+        <ConditionalHeader />
         <main className="flex-1">{children}</main>
-        <Footer />
+        <ConditionalFooter />
       </body>
     </html>
   );
