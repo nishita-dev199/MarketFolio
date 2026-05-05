@@ -23,7 +23,7 @@ export default function Navbar() {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex gap-2 font-medium">
           <Link href="/" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all">Home</Link>
-          <Link href="/services" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all">Services</Link>
+          <Link href="/#services" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all">Services</Link>
           <Link href="/blog" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all">Blog</Link>
           <Link href="/about" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all">About Us</Link>
           <Link href="/#contact" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all">Contact</Link>
@@ -58,7 +58,7 @@ export default function Navbar() {
               Home
             </Link>
             <Link 
-              href="/services" 
+              href="/#services" 
               onClick={() => setIsOpen(false)}
               className="text-3xl font-black text-zinc-400 hover:text-black transition-colors"
             >
