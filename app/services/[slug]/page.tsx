@@ -57,7 +57,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                   </li>
                   <li aria-hidden>/</li>
                   <li>
-                    <Link href="/services" className="hover:text-white transition-colors">
+                    <Link href="/#services" className="hover:text-white transition-colors">
                       Services
                     </Link>
                   </li>
@@ -85,7 +85,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                     Book a consultation →
                   </Link>
                   <Link
-                    href="/services"
+                    href="/#services"
                     className="inline-flex justify-center items-center border border-white/20 text-white px-8 py-4 rounded-full font-bold hover:bg-white/10 transition-colors"
                   >
                     All services
@@ -140,21 +140,28 @@ export default async function ServiceDetailPage({ params }: Props) {
           </div>
         </section>
 
-        <section className="w-full py-20 md:py-24 px-6 bg-background">
-          <div className="max-w-7xl w-full mx-auto">
+        <section className="w-full py-20 md:py-24 px-6 bg-background relative overflow-hidden">
+          <div className="max-w-7xl w-full mx-auto relative z-10">
             <RevealOnScroll>
               <h2 className="text-3xl md:text-4xl font-medium tracking-tighter text-black mb-10 text-center md:text-left">
                 Ideal fit
               </h2>
             </RevealOnScroll>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {service.idealFor.map((line, index) => (
-                <RevealOnScroll key={line} delayMs={index * 70}>
-                  <div className="float-md rounded-2xl p-8 h-full border border-black/5 bg-white">
-                    <p className="text-zinc-600 font-medium leading-relaxed">{line}</p>
-                  </div>
-                </RevealOnScroll>
-              ))}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 perspective-1000">
+              {service.idealFor.map((line, index) => {
+                // Diagonal/opposite cards get the teardrop border
+                const hasTeardrop = index === 0 || index === 2;
+                return (
+                  <RevealOnScroll key={line} delayMs={index * 70} className="h-full">
+                    <div 
+                      className={`float-sm rounded-2xl p-8 h-full bg-white group hover:scale-[1.02] transition-transform duration-500 hover:[transform:rotateX(5deg)_rotateY(-5deg)] ${hasTeardrop ? 'teardrop-border' : 'border border-black/5'}`}
+                      style={{ transformStyle: "preserve-3d" }}
+                    >
+                      <p className="text-zinc-700 font-medium leading-relaxed">{line}</p>
+                    </div>
+                  </RevealOnScroll>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -164,7 +171,7 @@ export default async function ServiceDetailPage({ params }: Props) {
             <RevealOnScroll>
               <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
                 <h2 className="text-2xl md:text-3xl font-medium tracking-tighter text-black">Related services</h2>
-                <Link href="/services" className="text-sm font-bold text-zinc-500 hover:text-black transition-colors">
+                <Link href="/#services" className="text-sm font-bold text-zinc-500 hover:text-black transition-colors">
                   View all →
                 </Link>
               </div>

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaInstagram, FaLinkedin, FaFacebook, FaYoutube } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -29,7 +29,7 @@ export default function Footer() {
           <Link href="/services/seo-organic-growth" className="text-zinc-400 hover:text-white transition-colors text-sm">SEO & Organic Growth</Link>
           <Link href="/services/funnel-based-approach" className="text-zinc-400 hover:text-white transition-colors text-sm">Funnel Strategy</Link>
           <Link href="/services/data-driven-decision-making" className="text-zinc-400 hover:text-white transition-colors text-sm">Analytics & Reporting</Link>
-          <Link href="/services" className="text-zinc-400 hover:text-white transition-colors text-sm font-semibold">All services →</Link>
+          <Link href="/#services" className="text-zinc-400 hover:text-white transition-colors text-sm font-semibold">All services →</Link>
         </div>
 
         <div className="flex flex-col items-center md:items-start gap-4">
@@ -50,10 +50,16 @@ export default function Footer() {
       </div>
       
       <div className="mx-auto max-w-7xl px-6 mt-16 pt-8 border-t border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-zinc-500">
-        <p>&copy; {new Date().getFullYear()} Evander Digital Marketing. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Evander Digital. All rights reserved.</p>
         
         <div className="flex items-center gap-8">
           <div className="flex gap-6 items-center">
+             <a href="https://www.facebook.com/share/1B7oERZiC9/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors">
+              <FaFacebook className="w-5 h-5" />
+            </a>
+             <a href="https://www.youtube.com/@evanderdigital" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors">
+              <FaYoutube className="w-5 h-5" />
+            </a>
             <a href="https://www.instagram.com/evanderdigital?igsh=MXR0andzNjd5MHIyOQ==" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors">
               <FaInstagram className="w-5 h-5" />
             </a>
