@@ -1,18 +1,17 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { BLOG_POSTS, getPostBySlug, getAllPostSlugs } from "@/lib/content/blog";
 import CtaSection from "@/components/sections/CtaSection";
+import dbConnect from "@/lib/dbConnect";
+import Blog from "@/models/Blog";
 
 type Props = { params: Promise<{ slug: string }> };
 
-export async function generateStaticParams() {
-  return getAllPostSlugs().map((slug) => ({ slug }));
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  await dbConnect();
+  const post = await Blog.findOne({ slug }).lean();
+  
   if (!post) return { title: "Blog" };
   return {
     title: post.title,
@@ -36,10 +35,12 @@ function formatDate(iso: string) {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  await dbConnect();
+  
+  const post = await Blog.findOne({ slug }).lean();
   if (!post) notFound();
 
-  const related = BLOG_POSTS.filter((p) => p.slug !== post.slug).slice(0, 2);
+  const relatedPosts = await Blog.find({ slug: { $ne: slug } }).limit(2).lean();
 
   return (
     <div className="flex flex-col flex-1 w-full font-sans bg-background">
@@ -93,48 +94,13 @@ export default async function BlogPostPage({ params }: Props) {
         </header>
 
         <div className="w-full max-w-3xl mx-auto px-6 py-14 md:py-20">
-          <div className="max-w-none">
-            {post.sections.map((block, i) => {
-              if (block.type === "paragraph") {
-                return (
-                  <p
-                    key={`p-${i}`}
-                    className="text-zinc-600 font-medium leading-relaxed text-base md:text-lg mb-6 last:mb-0"
-                  >
-                    {block.text}
-                  </p>
-                );
-              }
-
-              if (block.type === "heading") {
-                return (
-                  <h2
-                    key={`h-${i}`}
-                    className="text-2xl md:text-3xl font-medium tracking-tighter text-black mt-12 mb-4 first:mt-0"
-                  >
-                    {block.text}
-                  </h2>
-                );
-              }
-
-              return (
-                <ul key={`l-${i}`} className="list-none space-y-3 my-8 pl-0">
-                  {block.items.map((item) => (
-                    <li
-                      key={item}
-                      className="flex gap-3 text-zinc-600 font-medium leading-relaxed"
-                    >
-                      <span
-                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-black"
-                        aria-hidden
-                      />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              );
-            })}
-          </div>
+          <div 
+            className="prose prose-lg max-w-none prose-zinc 
+              prose-headings:font-medium prose-headings:tracking-tighter prose-headings:text-black
+              prose-p:text-zinc-600 prose-p:font-medium prose-p:leading-relaxed
+              prose-li:text-zinc-600 prose-li:font-medium"
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
 
           <div className="mt-14 pt-10 border-t border-zinc-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
             <Link
@@ -152,14 +118,14 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         </div>
 
-        {related.length > 0 ? (
+        {relatedPosts.length > 0 ? (
           <section className="w-full bg-zinc-50 py-16 md:py-20 px-6 border-t border-zinc-200/80">
             <div className="max-w-7xl w-full mx-auto">
               <h2 className="text-2xl font-medium tracking-tighter text-black mb-8">
                 Keep reading
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {related.map((p) => (
+                {relatedPosts.map((p) => (
                   <Link
                     key={p.slug}
                     href={`/blog/${p.slug}`}
@@ -186,3 +152,4 @@ export default async function BlogPostPage({ params }: Props) {
     </div>
   );
 }
+

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { SERVICES } from '@/lib/content/services'
-import { BLOG_POSTS } from '@/lib/content/blog'
+import dbConnect from '@/lib/dbConnect'
+import Blog from '@/models/Blog'
 
 /** Regenerate on each request so lastModified and any future CMS-driven URLs stay current. */
 export const dynamic = 'force-dynamic'
@@ -25,8 +26,10 @@ const STATIC_ROUTES: SitemapEntry[] = [
   { path: '/terms', changeFrequency: 'yearly', priority: 0.3 },
 ]
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date()
+  await dbConnect()
+  const blogs = await Blog.find({}).lean()
 
   const staticUrls = STATIC_ROUTES.map(({ path, changeFrequency, priority }) => ({
     url: path === '/' ? SITE_URL : `${SITE_URL}${path}`,
@@ -42,7 +45,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }))
 
-  const blogUrls: MetadataRoute.Sitemap = BLOG_POSTS.map((p) => ({
+  const blogUrls: MetadataRoute.Sitemap = (blogs as unknown as { slug: string; date: string }[]).map((p) => ({
     url: `${SITE_URL}/blog/${p.slug}`,
     lastModified: new Date(p.date),
     changeFrequency: 'monthly' as const,

@@ -1,7 +1,8 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { BLOG_POSTS } from "@/lib/content/blog";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
+import dbConnect from "@/lib/dbConnect";
+import Blog from "@/models/Blog";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -26,8 +27,16 @@ function formatDate(iso: string) {
   });
 }
 
-export default function BlogPage() {
-  const sortedPosts = [...BLOG_POSTS].sort((a, b) => (a.date < b.date ? 1 : -1));
+export default async function BlogPage() {
+  await dbConnect();
+  const rawPosts = await Blog.find({}).sort({ date: -1 }).lean();
+  
+  // Convert _id to string to pass to client components
+  const sortedPosts = rawPosts.map((post) => ({
+    ...post,
+    _id: post._id.toString(),
+  }));
+
   const featuredPost = sortedPosts[0];
   const regularPosts = sortedPosts.slice(1);
 

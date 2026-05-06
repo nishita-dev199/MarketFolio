@@ -34,10 +34,6 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Invalid password");
         }
 
-        if (user.role !== "admin" && user.role !== "superadmin") {
-          throw new Error("You are not an admin");
-        }
-
         return {
           id: user._id.toString(),
           email: user.email,
