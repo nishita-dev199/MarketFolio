@@ -31,7 +31,7 @@ export default function AdminLogin() {
         router.push("/admin");
         router.refresh();
       }
-    } catch (error) {
+    } catch {
       toast.error("Something went wrong");
     } finally {
       setLoading(false);

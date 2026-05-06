@@ -33,7 +33,7 @@ const team = [
   {
     name: "Riti Shah",
     role: "Business Development Executive",
-    image: "/team/riti.png",
+    image: "/team/riti.jpeg",
   },
   {
     name: "Jitisha Bhutani",
@@ -81,11 +81,11 @@ export default function TeamSection() {
           A collective of specialists dedicated to turning complex data into simple, scalable growth.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+        <div className="flex flex-wrap justify-center gap-8 w-full">
           {team.map((member) => (
             <div 
               key={member.name} 
-              className="float-lg rounded-[2.5rem] overflow-hidden bg-white teardrop-border group hover:scale-[1.05] transition-all duration-500 cursor-pointer relative aspect-[4/5]"
+              className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.34rem)] float-lg rounded-[2.5rem] overflow-hidden bg-white teardrop-border group hover:scale-[1.05] transition-all duration-500 cursor-pointer relative aspect-[4/5]"
             >
               {/* Image */}
               <img 

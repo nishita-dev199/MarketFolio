@@ -50,7 +50,7 @@ export default function PrivacyPolicyPage() {
 
             <section>
               <h2 className="text-2xl font-black mb-4 text-black">6. Third-Party Links</h2>
-              <p className="text-lg text-zinc-500 leading-relaxed font-medium">We are not responsible for external websites' privacy practices.</p>
+              <p className="text-lg text-zinc-500 leading-relaxed font-medium">We are not responsible for external websites&apos; privacy practices.</p>
             </section>
 
             <section>
