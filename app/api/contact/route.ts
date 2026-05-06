@@ -69,7 +69,7 @@ export async function POST(req: Request) {
     await transporter.sendMail(mailOptions);
 
     return NextResponse.json({ message: "Inquiry sent successfully!" }, { status: 200 });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Email Error:", error);
     return NextResponse.json(
       { error: "Failed to send inquiry. Please try again later." },

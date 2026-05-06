@@ -1,31 +1,43 @@
-const { MongoClient } = require("mongodb");
+/* eslint-disable @typescript-eslint/no-require-imports */
+const { loadEnvConfig } = require("@next/env");
+const projectDir = process.cwd();
+loadEnvConfig(projectDir);
+
+const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
 const uri = process.env.MONGODB_URI;
-console.log("URI:", uri);
+console.log("URI:", uri ? "Found" : "Not Found");
+
+const userSchema = new mongoose.Schema(
+  {
+    email: { type: String, required: true, unique: true, lowercase: true },
+    password: { type: String, required: true },
+    role: { type: String, default: "user", enum: ["admin", "superadmin", "user"] },
+  },
+  { timestamps: true }
+);
 
 async function seed() {
     if (!uri) {
         console.error("No MONGODB_URI found.");
         return;
     }
-    const client = new MongoClient(uri);
+    
     try {
-        await client.connect();
-        const db = client.db("evander"); // Using "evander" as the database name
-        const users = db.collection("users");
+        await mongoose.connect(uri);
+        const User = mongoose.models.User || mongoose.model("User", userSchema);
         
         const email = process.env.EMAIL_USER || "evanderfirm@gmail.com";
-        const password = "evanderadmin"; // Default password
+        const password = "evanderadmin";
         const hashedPassword = await bcrypt.hash(password, 10);
         
-        const existingUser = await users.findOne({ email });
+        const existingUser = await User.findOne({ email });
         if (!existingUser) {
-            await users.insertOne({
+            await User.create({
                 email,
                 password: hashedPassword,
-                role: "admin",
-                createdAt: new Date()
+                role: "admin"
             });
             console.log(`Successfully seeded admin user! Email: ${email}, Password: ${password}`);
         } else {
@@ -34,7 +46,7 @@ async function seed() {
     } catch (e) {
         console.error("Error seeding DB:", e);
     } finally {
-        await client.close();
+        await mongoose.disconnect();
     }
 }
 seed();

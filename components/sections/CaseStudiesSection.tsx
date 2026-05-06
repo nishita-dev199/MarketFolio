@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+// React hooks removed as they were unused
 
 const caseStudies = [
   {

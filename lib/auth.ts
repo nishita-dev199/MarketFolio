@@ -1,7 +1,8 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
-import clientPromise from "./mongodb";
+import dbConnect from "./dbConnect";
+import User from "../models/User";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -16,12 +17,15 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Invalid credentials");
         }
 
-        const client = await clientPromise;
-        const db = client.db("evander");
-        const user = await db.collection("users").findOne({ email: credentials.email });
+        await dbConnect();
+        const user = await User.findOne({ email: credentials.email }).lean();
 
         if (!user) {
           throw new Error("No user found with that email");
+        }
+
+        if (!user.password) {
+          throw new Error("Invalid password");
         }
 
         const isValid = await bcrypt.compare(credentials.password, user.password);
@@ -51,13 +55,13 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.role = (user as any).role;
+        token.role = (user as { role?: string }).role;
       }
       return token;
     },
     async session({ session, token }) {
       if (session.user) {
-        (session.user as any).role = token.role;
+        (session.user as { role?: string }).role = token.role as string;
       }
       return session;
     }
