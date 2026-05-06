@@ -66,8 +66,9 @@ export default function CtaSection() {
       setStatus("success");
       setFormData({ name: "", email: "", website: "", message: "" });
       setErrors({});
-    } catch (err: any) {
-      toast.error(err.message || "Failed to send inquiry.", { id: loadingToast });
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : "Failed to send inquiry.";
+      toast.error(errorMessage, { id: loadingToast });
       setStatus("error");
     }
   };

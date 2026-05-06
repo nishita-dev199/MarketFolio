@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ServicesSection from "@/components/sections/ServicesSection";
 import MetricsSection from "@/components/sections/MetricsSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
@@ -70,9 +71,9 @@ export default function Home() {
 
             <div className="flex flex-col sm:flex-row items-center gap-4 mb-20">
               <button className="float-dark bg-black text-white px-10 py-4 rounded-full font-medium text-base hover:scale-[1.03] active:scale-95 transition-transform tracking-wide">
-              <a href="/#contact">
+              <Link href="/#contact">
                 Book a Free Consultation →
-              </a>              
+              </Link>              
               </button> 
             </div>
             

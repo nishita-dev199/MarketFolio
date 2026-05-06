@@ -1,6 +1,6 @@
 import mongoose, { Schema, models, Model } from "mongoose";
 
-export interface IAdmin {
+export interface IUser {
   email: string;
   password?: string;
   role: string;
@@ -8,7 +8,7 @@ export interface IAdmin {
   updatedAt: Date;
 }
 
-const adminSchema = new Schema<IAdmin>(
+const userSchema = new Schema<IUser>(
   {
     email: {
       type: String,
@@ -23,15 +23,13 @@ const adminSchema = new Schema<IAdmin>(
     },
     role: {
       type: String,
-      default: "admin",
-      enum: ["admin", "superadmin"],
+      default: "user",
+      enum: ["admin", "superadmin", "user"],
     },
   },
   { timestamps: true }
 );
 
-// Mongoose automatically looks for the plural, lowercased version of your model name.
-// Thus, the model "Admin" is for the "admins" collection in the database.
-const Admin: Model<IAdmin> = models.Admin || mongoose.model<IAdmin>("Admin", adminSchema);
+const User: Model<IUser> = models.User || mongoose.model<IUser>("User", userSchema);
 
-export default Admin;
+export default User;
