@@ -4,6 +4,8 @@ import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import dbConnect from "@/lib/dbConnect";
 import Blog from "@/models/Blog";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Blog",
   description:
