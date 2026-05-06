@@ -59,9 +59,8 @@ export default function AdminLogin() {
             router.push("/");
           } else {
             toast.success("Login successful");
-            router.push("/admin");
+            window.location.href = "/admin";
           }
-          router.refresh();
         }
       }
     } catch {

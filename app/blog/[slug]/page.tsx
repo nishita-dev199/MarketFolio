@@ -5,6 +5,8 @@ import CtaSection from "@/components/sections/CtaSection";
 import dbConnect from "@/lib/dbConnect";
 import Blog from "@/models/Blog";
 
+export const dynamic = "force-dynamic";
+
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
