@@ -26,6 +26,11 @@ export default function BlogEditor({ params: paramsPromise }: { params: Promise<
     date: new Date().toISOString().split("T")[0],
     excerpt: "",
     content: "",
+    metaTitle: "",
+    metaDescription: "",
+    keywords: "",
+    image: "",
+    imageAlt: "",
   });
 
   useEffect(() => {
@@ -46,6 +51,11 @@ export default function BlogEditor({ params: paramsPromise }: { params: Promise<
             date: data.date,
             excerpt: data.excerpt,
             content: data.content,
+            metaTitle: data.metaTitle || "",
+            metaDescription: data.metaDescription || "",
+            keywords: data.keywords || "",
+            image: data.image || "",
+            imageAlt: data.imageAlt || "",
           });
           setLoading(false);
         }
@@ -69,7 +79,14 @@ export default function BlogEditor({ params: paramsPromise }: { params: Promise<
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)+/g, "");
-    setFormData({ ...formData, slug });
+    
+    // Auto-populate SEO fields if they are empty
+    setFormData(prev => ({ 
+      ...prev, 
+      slug,
+      metaTitle: prev.metaTitle || prev.title,
+      metaDescription: prev.metaDescription || prev.excerpt
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -113,7 +130,7 @@ export default function BlogEditor({ params: paramsPromise }: { params: Promise<
 
   const quillModules = {
     toolbar: [
-      [{ header: [1, 2, 3, false] }],
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
       ["bold", "italic", "underline", "strike", "blockquote"],
       [{ list: "ordered" }, { list: "bullet" }],
       ["link", "image"],
@@ -154,7 +171,7 @@ export default function BlogEditor({ params: paramsPromise }: { params: Promise<
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-indigo-200/80 mb-2">Title</label>
+                <label className="block text-sm font-medium text-indigo-200/80 mb-2">Blog Title</label>
                 <input
                   type="text"
                   value={formData.title}
@@ -166,7 +183,7 @@ export default function BlogEditor({ params: paramsPromise }: { params: Promise<
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-indigo-200/80 mb-2">Slug</label>
+                <label className="block text-sm font-medium text-indigo-200/80 mb-2">Custom URL</label>
                 <input
                   type="text"
                   value={formData.slug}
@@ -222,6 +239,85 @@ export default function BlogEditor({ params: paramsPromise }: { params: Promise<
                 className="w-full bg-[#0B0914]/50 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-indigo-200/30 focus:outline-none focus:border-purple-500/50 transition-all"
                 placeholder="A short summary of the blog post..."
               />
+            </div>
+
+            {/* SEO Section */}
+            <div className="border-t border-white/5 pt-8 mt-8">
+              <h3 className="text-xl font-bold text-white mb-6">SEO & Social Media</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-indigo-200/80 mb-2">Meta Title</label>
+                  <input
+                    type="text"
+                    value={formData.metaTitle}
+                    onChange={(e) => setFormData({ ...formData, metaTitle: e.target.value })}
+                    className="w-full bg-[#0B0914]/50 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-indigo-200/30 focus:outline-none focus:border-purple-500/50 transition-all"
+                    placeholder="SEO title (defaults to Blog Title)"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-indigo-200/80 mb-2">Focus Keywords</label>
+                  <input
+                    type="text"
+                    value={formData.keywords}
+                    onChange={(e) => setFormData({ ...formData, keywords: e.target.value })}
+                    className="w-full bg-[#0B0914]/50 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-indigo-200/30 focus:outline-none focus:border-purple-500/50 transition-all"
+                    placeholder="e.g. SEO, Growth, Marketing"
+                  />
+                </div>
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-indigo-200/80 mb-2">Meta Description</label>
+                  <textarea
+                    value={formData.metaDescription}
+                    onChange={(e) => setFormData({ ...formData, metaDescription: e.target.value })}
+                    rows={2}
+                    className="w-full bg-[#0B0914]/50 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-indigo-200/30 focus:outline-none focus:border-purple-500/50 transition-all"
+                    placeholder="SEO description (defaults to Excerpt)"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Media Section */}
+            <div className="border-t border-white/5 pt-8 mt-8">
+              <h3 className="text-xl font-bold text-white mb-6">Featured Image</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-indigo-200/80 mb-2">Image URL</label>
+                  <input
+                    type="text"
+                    value={formData.image}
+                    onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                    className="w-full bg-[#0B0914]/50 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-indigo-200/30 focus:outline-none focus:border-purple-500/50 transition-all"
+                    placeholder="https://images.unsplash.com/..."
+                  />
+                  {formData.image && (
+                    <div className="mt-4 rounded-xl overflow-hidden border border-white/5 aspect-video relative group">
+                      <img 
+                        src={formData.image} 
+                        alt="Preview" 
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = 'https://placehold.co/600x400/161427/white?text=Invalid+Image+URL';
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span className="text-xs font-bold text-white uppercase tracking-widest">Image Preview</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-indigo-200/80 mb-2">Image Alt Text</label>
+                  <input
+                    type="text"
+                    value={formData.imageAlt}
+                    onChange={(e) => setFormData({ ...formData, imageAlt: e.target.value })}
+                    className="w-full bg-[#0B0914]/50 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-indigo-200/30 focus:outline-none focus:border-purple-500/50 transition-all"
+                    placeholder="Descriptive text for the image"
+                  />
+                </div>
+              </div>
             </div>
 
             <div>

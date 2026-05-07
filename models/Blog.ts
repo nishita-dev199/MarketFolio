@@ -8,6 +8,11 @@ export interface IBlog {
   readTime: string;
   content: string;
   date: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  keywords?: string;
+  image?: string;
+  imageAlt?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -45,6 +50,26 @@ const blogSchema = new Schema<IBlog>(
       type: String,
       required: true,
       default: () => new Date().toISOString().split('T')[0],
+    },
+    metaTitle: {
+      type: String,
+      trim: true,
+    },
+    metaDescription: {
+      type: String,
+      trim: true,
+    },
+    keywords: {
+      type: String,
+      trim: true,
+    },
+    image: {
+      type: String,
+      trim: true,
+    },
+    imageAlt: {
+      type: String,
+      trim: true,
     },
   },
   { timestamps: true }
