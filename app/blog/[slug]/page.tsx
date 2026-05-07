@@ -16,13 +16,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   
   if (!post) return { title: "Blog" };
   return {
-    title: post.title,
-    description: post.excerpt,
+    title: post.metaTitle || post.title,
+    description: post.metaDescription || post.excerpt,
+    keywords: post.keywords,
     openGraph: {
-      title: `${post.title} | Evander Digital`,
-      description: post.excerpt,
+      title: post.metaTitle || `${post.title} | Evander Digital`,
+      description: post.metaDescription || post.excerpt,
       type: "article",
       publishedTime: post.date,
+      images: post.image ? [
+        {
+          url: post.image,
+          alt: post.imageAlt || post.title,
+        }
+      ] : [],
     },
   };
 }
@@ -47,17 +54,32 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <div className="flex flex-col flex-1 w-full font-sans bg-background">
       <article className="flex flex-1 w-full flex-col items-center">
-        <header className="w-full bg-black text-white relative overflow-hidden">
-          <div
-            aria-hidden
-            className="absolute inset-0 opacity-35"
-            style={{
-              background:
-                "radial-gradient(ellipse 60% 50% at 20% 0%, rgba(59,130,246,0.4), transparent 55%), radial-gradient(ellipse 45% 40% at 95% 30%, rgba(168,85,247,0.3), transparent 50%)",
-            }}
-          />
-          <div className="absolute inset-0 bg-linear-to-b from-transparent via-black/80 to-black" />
-          <div className="max-w-3xl w-full mx-auto px-6 pt-24 pb-16 md:pt-32 md:pb-24 relative z-10">
+        <header className="w-full bg-black text-white relative overflow-hidden -mt-[110px] pt-[110px] min-h-[450px] flex items-center">
+          {/* Background Image with Gradient Overlay */}
+          {post.image && (
+            <div className="absolute inset-0 z-0">
+              <img 
+                src={post.image} 
+                alt="" 
+                className="w-full h-full object-cover opacity-40 grayscale-[0.1]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-black via-black/20 to-black z-10" />
+            </div>
+          )}
+          
+          {/* Fallback radial gradients if no image */}
+          {!post.image && (
+            <div
+              aria-hidden
+              className="absolute inset-0 opacity-35"
+              style={{
+                background:
+                  "radial-gradient(ellipse 60% 50% at 20% 0%, rgba(59,130,246,0.4), transparent 55%), radial-gradient(ellipse 45% 40% at 95% 30%, rgba(168,85,247,0.3), transparent 50%)",
+              }}
+            />
+          )}
+
+          <div className="max-w-3xl w-full mx-auto px-6 pt-24 pb-16 md:pt-32 md:pb-24 relative z-20">
             <nav aria-label="Breadcrumb" className="text-sm text-zinc-400 mb-10">
               <ol className="flex flex-wrap items-center gap-2">
                 <li>
@@ -82,10 +104,10 @@ export default async function BlogPostPage({ params }: Props) {
               {post.category}
             </p>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tighter leading-[1.08] mb-6">
-              {post.title}
+              {post.metaTitle || post.title}
             </h1>
             <p className="text-lg text-zinc-300 font-medium leading-relaxed mb-8">
-              {post.excerpt}
+              {post.metaDescription || post.excerpt}
             </p>
             <div className="flex flex-wrap gap-4 text-sm text-zinc-400 font-medium">
               <time dateTime={post.date}>{formatDate(post.date)}</time>
