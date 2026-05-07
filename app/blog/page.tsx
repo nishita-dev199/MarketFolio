@@ -112,7 +112,17 @@ export default async function BlogPage() {
                     className="float-dark rounded-[2.5rem] md:rounded-[3.5rem] p-8 md:p-16 flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-12 group-hover:scale-[1.02] transition-all duration-500 overflow-hidden w-full relative"
                     style={{ transformStyle: "preserve-3d" }}
                   >
-
+                    {/* Featured Image Background */}
+                    {featuredPost.image && (
+                      <div className="absolute inset-0 z-0">
+                        <img 
+                          src={featuredPost.image}
+                          alt={featuredPost.imageAlt || featuredPost.title}
+                          className="w-full h-full object-cover opacity-20 grayscale group-hover:grayscale-0 group-hover:opacity-40 transition-all duration-700"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#161427] via-transparent to-transparent" />
+                      </div>
+                    )}
 
                     <div className="flex-1 flex flex-col items-start w-full relative z-10">
                       <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-white border border-white/20 text-[10px] font-black uppercase tracking-widest mb-6 backdrop-blur-md">
@@ -169,8 +179,8 @@ export default async function BlogPage() {
                         {/* Background Image Layer */}
                         <div className="absolute inset-0 z-0 bg-white">
                           <img 
-                            src={imageUrl}
-                            alt=""
+                            src={post.image || imageUrl}
+                            alt={post.imageAlt || ""}
                             style={{ opacity: baseOpacity / 100 }}
                             className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:opacity-40 transition-all duration-700 mix-blend-multiply"
                           />
