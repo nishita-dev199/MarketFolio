@@ -159,8 +159,7 @@ export default async function BlogPage() {
               {regularPosts.map((post, index) => {
                 // Make the first item in the grid span 2 columns on tablet/desktop if we want a varied gallery look
                 const isLargeCard = index === 0;
-                // Vary the initial grayscale opacity between 10% and 30% to give different gray intensities
-                const baseOpacity = 10 + (index % 3) * 10;
+
                 // Select a consistent image for this post based on its index
                 const imageUrl = POST_IMAGES[index % POST_IMAGES.length];
                 // Apply teardrop border to diagonal/opposite cards
