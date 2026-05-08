@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
+import BlogImage from "@/components/ui/BlogImage";
 import dbConnect from "@/lib/dbConnect";
 import Blog from "@/models/Blog";
 
@@ -20,6 +21,9 @@ const POST_IMAGES = [
   "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop"
 ];
+
+const FALLBACK_IMAGE = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23161427'/%3E%3Cpath d='M300 300 L500 300 M400 200 L400 400' stroke='white' stroke-width='2' opacity='0.1'/%3E%3C/svg%3E";
+
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-US", {
@@ -112,17 +116,17 @@ export default async function BlogPage() {
                     className="float-dark rounded-[2.5rem] md:rounded-[3.5rem] p-8 md:p-16 flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-12 group-hover:scale-[1.02] transition-all duration-500 overflow-hidden w-full relative"
                     style={{ transformStyle: "preserve-3d" }}
                   >
-                    {/* Featured Image Background */}
-                    {featuredPost.image && (
-                      <div className="absolute inset-0 z-0">
-                        <img 
-                          src={featuredPost.image}
-                          alt={featuredPost.imageAlt || featuredPost.title}
-                          className="w-full h-full object-cover opacity-20 grayscale group-hover:grayscale-0 group-hover:opacity-40 transition-all duration-700"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#161427] via-transparent to-transparent" />
-                      </div>
-                    )}
+                    {/* Featured Image Background - Always show on main page, with fallback */}
+                    <div className="absolute inset-0 z-0">
+                      <BlogImage 
+                        src={featuredPost.image || POST_IMAGES[0]}
+                        alt={featuredPost.imageAlt || featuredPost.title}
+                        className="w-full h-full object-cover"
+                        opacity={20}
+                        fallback={FALLBACK_IMAGE}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#161427] via-transparent to-transparent" />
+                    </div>
 
                     <div className="flex-1 flex flex-col items-start w-full relative z-10">
                       <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-white border border-white/20 text-[10px] font-black uppercase tracking-widest mb-6 backdrop-blur-md">
@@ -157,12 +161,8 @@ export default async function BlogPage() {
             {/* Standard Grid Posts */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {regularPosts.map((post, index) => {
-                // Make the first item in the grid span 2 columns on tablet/desktop if we want a varied gallery look
                 const isLargeCard = index === 0;
-
-                // Select a consistent image for this post based on its index
                 const imageUrl = POST_IMAGES[index % POST_IMAGES.length];
-                // Apply teardrop border to diagonal/opposite cards
                 const hasTeardrop = index === 0 || index === 1;
                 
                 return (
@@ -177,10 +177,11 @@ export default async function BlogPage() {
                       >
                         {/* Image Section */}
                         <div className={`relative w-full overflow-hidden ${isLargeCard ? 'h-[300px]' : 'h-[200px]'}`}>
-                          <img 
+                          <BlogImage 
                             src={post.image || imageUrl}
                             alt={post.imageAlt || ""}
-                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                            className="w-full h-full object-cover"
+                            fallback={FALLBACK_IMAGE}
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-60" />
                           <div className="absolute top-6 left-6 relative z-20">
