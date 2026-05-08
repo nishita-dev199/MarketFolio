@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, use } from "react";
+import { useEffect, useState, use, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
@@ -17,6 +17,8 @@ export default function BlogEditor({ params: paramsPromise }: { params: Promise<
 
   const [loading, setLoading] = useState(!isNew);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -87,6 +89,39 @@ export default function BlogEditor({ params: paramsPromise }: { params: Promise<
       metaTitle: prev.metaTitle || prev.title,
       metaDescription: prev.metaDescription || prev.excerpt
     }));
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith("image/")) {
+      toast.error("Please upload an image file");
+      return;
+    }
+
+    setUploading(true);
+    const formDataUpload = new FormData();
+    formDataUpload.append("file", file);
+
+    try {
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formDataUpload,
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Upload failed");
+
+      setFormData(prev => ({ ...prev, image: data.url }));
+      toast.success("Image uploaded successfully!");
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Failed to upload image");
+    } finally {
+      setUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -243,7 +278,7 @@ export default function BlogEditor({ params: paramsPromise }: { params: Promise<
 
             {/* SEO Section */}
             <div className="border-t border-white/5 pt-8 mt-8">
-              <h3 className="text-xl font-bold text-white mb-6">SEO & Social Media</h3>
+              <h3 className="text-xl font-bold text-white mb-6">SEO</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-indigo-200/80 mb-2">Meta Title</label>
@@ -283,14 +318,35 @@ export default function BlogEditor({ params: paramsPromise }: { params: Promise<
               <h3 className="text-xl font-bold text-white mb-6">Featured Image</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-indigo-200/80 mb-2">Image URL</label>
-                  <input
-                    type="text"
-                    value={formData.image}
-                    onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                    className="w-full bg-[#0B0914]/50 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-indigo-200/30 focus:outline-none focus:border-purple-500/50 transition-all"
-                    placeholder="https://images.unsplash.com/..."
-                  />
+                  <label className="block text-sm font-medium text-indigo-200/80 mb-2">Image</label>
+                  <div className="flex gap-4 mb-4">
+                    <input
+                      type="text"
+                      value={formData.image}
+                      onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                      className="flex-1 bg-[#0B0914]/50 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-indigo-200/30 focus:outline-none focus:border-purple-500/50 transition-all"
+                      placeholder="Upload an image or paste URL"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current?.click()}
+                      disabled={uploading}
+                      className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-sm font-medium flex items-center gap-2 whitespace-nowrap"
+                    >
+                      {uploading ? (
+                        <div className="w-4 h-4 border-2 border-white/50 border-t-transparent rounded-full animate-spin"></div>
+                      ) : (
+                        "Upload"
+                      )}
+                    </button>
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      onChange={handleImageUpload}
+                      className="hidden"
+                      accept="image/*"
+                    />
+                  </div>
                   {formData.image && (
                     <div className="mt-4 rounded-xl overflow-hidden border border-white/5 aspect-video relative group">
                       <img 
@@ -298,7 +354,7 @@ export default function BlogEditor({ params: paramsPromise }: { params: Promise<
                         alt="Preview" 
                         className="w-full h-full object-cover"
                         onError={(e) => {
-                          (e.target as HTMLImageElement).src = 'https://placehold.co/600x400/161427/white?text=Invalid+Image+URL';
+                          (e.target as HTMLImageElement).src = 'https://placehold.co/600x400/161427/white?text=Invalid+Image';
                         }}
                       />
                       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
