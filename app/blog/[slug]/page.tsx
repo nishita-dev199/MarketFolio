@@ -42,6 +42,15 @@ function formatDate(iso: string) {
   });
 }
 
+const POST_IMAGES = [
+  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop"
+];
+
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
   await dbConnect();
@@ -51,78 +60,70 @@ export default async function BlogPostPage({ params }: Props) {
 
   const relatedPosts = await Blog.find({ slug: { $ne: slug } }).limit(2).lean();
 
+
   return (
     <div className="flex flex-col flex-1 w-full font-sans bg-background">
       <article className="flex flex-1 w-full flex-col items-center">
-        <header className="w-full bg-black text-white relative overflow-hidden -mt-[110px] pt-[110px] min-h-[450px] flex items-center">
-          {/* Background Image with Gradient Overlay */}
-          {post.image && (
-            <div className="absolute inset-0 z-0">
-              <img 
-                src={post.image} 
-                alt="" 
-                className="w-full h-full object-cover opacity-40 grayscale-[0.1]"
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-black via-black/20 to-black z-10" />
-            </div>
-          )}
-          
-          {/* Fallback radial gradients if no image */}
-          {!post.image && (
-            <div
-              aria-hidden
-              className="absolute inset-0 opacity-35"
-              style={{
-                background:
-                  "radial-gradient(ellipse 60% 50% at 20% 0%, rgba(59,130,246,0.4), transparent 55%), radial-gradient(ellipse 45% 40% at 95% 30%, rgba(168,85,247,0.3), transparent 50%)",
-              }}
-            />
-          )}
+        <header className="w-full bg-[#0B0914] text-white relative overflow-hidden -mt-[110px] pt-[110px] min-h-[600px] flex items-center justify-center">
+          {/* Background Elements */}
+          <div className="absolute top-0 right-0 w-[50%] h-full bg-purple-600/10 blur-[120px] rounded-full pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-[40%] h-[60%] bg-indigo-600/10 blur-[120px] rounded-full pointer-events-none" />
 
-          <div className="max-w-3xl w-full mx-auto px-6 pt-24 pb-16 md:pt-32 md:pb-24 relative z-20">
-            <nav aria-label="Breadcrumb" className="text-sm text-zinc-400 mb-10">
-              <ol className="flex flex-wrap items-center gap-2">
-                <li>
-                  <Link href="/" className="hover:text-white transition-colors">
-                    Home
-                  </Link>
-                </li>
-                <li aria-hidden>/</li>
-                <li>
-                  <Link href="/blog" className="hover:text-white transition-colors">
-                    Blog
-                  </Link>
-                </li>
-                <li aria-hidden>/</li>
-                <li className="text-zinc-200 font-medium line-clamp-1 max-w-48 sm:max-w-none">
+          <div className="max-w-7xl w-full mx-auto px-6 py-20 md:py-32 relative z-20">
+            <div className={`flex flex-col lg:flex-row gap-16 lg:gap-24 items-center ${post.image ? 'lg:items-center text-center lg:text-left' : 'text-center'}`}>
+              <div className={`flex-1 w-full ${post.image ? 'max-w-2xl' : 'max-w-4xl mx-auto'}`}>
+                <nav aria-label="Breadcrumb" className={`text-sm text-zinc-400 mb-8 flex items-center gap-2 font-medium ${post.image ? 'justify-center lg:justify-start' : 'justify-center'}`}>
+                  <Link href="/" className="hover:text-white transition-colors">Home</Link>
+                  <span className="text-zinc-600">/</span>
+                  <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
+                  <span className="text-zinc-600">/</span>
+                  <span className="text-zinc-200 truncate max-w-[150px] sm:max-w-[300px]">{post.title}</span>
+                </nav>
+
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-white border border-white/20 text-[10px] font-black uppercase tracking-widest mb-6 backdrop-blur-md">
+                  {post.category}
+                </div>
+                
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter leading-[1.1] mb-8 text-white drop-shadow-2xl">
                   {post.title}
-                </li>
-              </ol>
-            </nav>
+                </h1>
+                
+                <p className={`text-base md:text-lg text-zinc-400 font-medium leading-relaxed mb-10 ${post.image ? '' : 'mx-auto'}`}>
+                  {post.excerpt}
+                </p>
 
-            <p className="text-xs font-black uppercase tracking-widest text-zinc-400 mb-4">
-              {post.category}
-            </p>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tighter leading-[1.08] mb-6">
-              {post.metaTitle || post.title}
-            </h1>
-            <p className="text-lg text-zinc-300 font-medium leading-relaxed mb-8">
-              {post.metaDescription || post.excerpt}
-            </p>
-            <div className="flex flex-wrap gap-4 text-sm text-zinc-400 font-medium">
-              <time dateTime={post.date}>{formatDate(post.date)}</time>
-              <span aria-hidden>·</span>
-              <span>{post.readTime}</span>
+                <div className={`flex items-center gap-6 text-[10px] sm:text-xs text-zinc-500 font-bold uppercase tracking-widest ${post.image ? 'justify-center lg:justify-start' : 'justify-center'}`}>
+                  <div className="flex items-center gap-2">
+                    <span className="w-6 h-[1px] bg-zinc-800"></span>
+                    {formatDate(post.date)}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-6 h-[1px] bg-zinc-800"></span>
+                    {post.readTime}
+                  </div>
+                </div>
+              </div>
+
+              {post.image && (
+                <div className="flex-1 w-full max-w-lg lg:mt-12 relative group">
+                  <div className="absolute -inset-4 bg-gradient-to-tr from-purple-600/20 to-indigo-600/20 blur-3xl rounded-[3rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                  <div className="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl shadow-black/50 aspect-square sm:aspect-video lg:aspect-[4/5]">
+                    <img 
+                      src={post.image} 
+                      alt={post.imageAlt || post.title} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B0914] via-transparent to-transparent opacity-60"></div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </header>
 
-        <div className="w-full max-w-3xl mx-auto px-6 py-14 md:py-20">
+        <div className="w-full max-w-3xl mx-auto px-6 py-16 md:py-28 overflow-hidden break-words">
           <div 
-            className="prose prose-lg max-w-none prose-zinc 
-              prose-headings:font-medium prose-headings:tracking-tighter prose-headings:text-black
-              prose-p:text-zinc-600 prose-p:font-medium prose-p:leading-relaxed
-              prose-li:text-zinc-600 prose-li:font-medium"
+            className="blog-content w-full"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 

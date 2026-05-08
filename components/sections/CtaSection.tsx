@@ -7,7 +7,8 @@ export default function CtaSection() {
     name: "",
     email: "",
     website: "",
-    message: ""
+    message: "",
+    honeypot: "" // Added honeypot field
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -50,10 +51,12 @@ export default function CtaSection() {
     const loadingToast = toast.loading("Sending your inquiry...");
 
     try {
+      const turnstileToken = (document.getElementsByName('cf-turnstile-response')[0] as HTMLInputElement)?.value;
+
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, turnstileToken }),
       });
 
       const data = await response.json();
@@ -64,7 +67,7 @@ export default function CtaSection() {
 
       toast.success("Inquiry sent successfully!", { id: loadingToast });
       setStatus("success");
-      setFormData({ name: "", email: "", website: "", message: "" });
+      setFormData({ name: "", email: "", website: "", message: "", honeypot: "" });
       setErrors({});
     } catch (err: unknown) {
       const errorMessage = err instanceof Error ? err.message : "Failed to send inquiry.";
@@ -159,6 +162,25 @@ export default function CtaSection() {
                   className={`w-full bg-zinc-900/50 border ${errors.message ? 'border-red-500/50' : 'border-zinc-800'} rounded-[2rem] px-6 py-4 text-white focus:outline-none focus:border-white transition-colors resize-none`}
                 ></textarea>
               </div>
+
+              {/* Honeypot Field - Hidden from humans, but bots will fill it */}
+              <div className="hidden" aria-hidden="true">
+                <input 
+                  type="text" 
+                  name="honeypot" 
+                  tabIndex={-1} 
+                  autoComplete="off"
+                  value={formData.honeypot}
+                  onChange={(e) => setFormData({ ...formData, honeypot: e.target.value })}
+                />
+              </div>
+
+              {/* Cloudflare Turnstile Widget Placeholder */}
+              <div 
+                className="cf-turnstile" 
+                data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "your-site-key"}
+                data-theme="dark"
+              ></div>
 
               <button 
                 type="submit" 

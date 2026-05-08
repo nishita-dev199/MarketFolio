@@ -173,26 +173,27 @@ export default async function BlogPage() {
                       className="group block h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-50"
                     >
                       <div
-                        className={`float-lg rounded-[2.5rem] p-8 md:p-10 flex flex-col items-start bg-white group-hover:scale-[1.03] transition-all duration-500 overflow-hidden shadow-[0_15px_40px_-15px_rgba(0,0,0,0.1)] group-hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.2)] h-full relative ${isLargeCard ? 'min-h-[400px]' : 'min-h-[350px]'} ${hasTeardrop ? 'teardrop-border' : ''}`}
+                        className={`float-lg rounded-[2.5rem] flex flex-col bg-white group-hover:scale-[1.02] transition-all duration-500 overflow-hidden shadow-[0_15px_40px_-15px_rgba(0,0,0,0.1)] group-hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.2)] h-full relative ${isLargeCard ? 'min-h-[500px]' : 'min-h-[450px]'} ${hasTeardrop ? 'teardrop-border' : ''}`}
                         style={{ transformStyle: "preserve-3d" }}
                       >
-                        {/* Background Image Layer */}
-                        <div className="absolute inset-0 z-0 bg-white">
+                        {/* Image Section */}
+                        <div className={`relative w-full overflow-hidden ${isLargeCard ? 'h-[300px]' : 'h-[200px]'}`}>
                           <img 
                             src={post.image || imageUrl}
                             alt={post.imageAlt || ""}
-                            style={{ opacity: baseOpacity / 100 }}
-                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:opacity-40 transition-all duration-700 mix-blend-multiply"
+                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-transparent z-10" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-60" />
+                          <div className="absolute top-6 left-6 relative z-20">
+                            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/80 backdrop-blur-md text-white text-[10px] font-black uppercase tracking-widest group-hover:bg-purple-600 transition-colors duration-500">
+                              {post.category}
+                            </div>
+                          </div>
                         </div>
 
-                        <div className="relative z-20 flex flex-col h-full w-full">
-                          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900/5 backdrop-blur-sm text-black text-[10px] font-black uppercase tracking-widest mb-6 group-hover:bg-black group-hover:text-white transition-colors duration-500 self-start">
-                            {post.category}
-                          </div>
-                          
-                          <h2 className={`font-black tracking-tight text-black mb-4 group-hover:underline underline-offset-4 transition-all duration-500 ${isLargeCard ? 'text-3xl md:text-4xl' : 'text-2xl'}`}>
+                        {/* Content Section */}
+                        <div className="relative z-20 flex flex-col p-8 md:p-10 flex-1">
+                          <h2 className={`font-black tracking-tight text-black mb-4 group-hover:text-purple-600 transition-all duration-500 ${isLargeCard ? 'text-3xl md:text-4xl' : 'text-2xl'}`}>
                             {post.title}
                           </h2>
                           
@@ -200,10 +201,10 @@ export default async function BlogPage() {
                             {post.excerpt}
                           </p>
                           
-                          <div className="w-full border-t border-zinc-200/60 pt-6 flex items-center justify-between text-sm mt-auto group-hover:border-black/20 transition-colors">
+                          <div className="w-full border-t border-zinc-200/60 pt-6 flex items-center justify-between text-sm mt-auto group-hover:border-purple-200 transition-colors">
                             <span className="text-zinc-500 font-medium group-hover:text-zinc-800 transition-colors">{formatDate(post.date)}</span>
-                            <span className="font-black text-black opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 drop-shadow-sm">
-                              Read Article →
+                            <span className="font-black text-black opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 drop-shadow-sm flex items-center gap-2">
+                              Read Article <span className="text-purple-600">→</span>
                             </span>
                           </div>
                         </div>
