@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CtaSection from "@/components/sections/CtaSection";
+import BlogImage from "@/components/ui/BlogImage";
 import dbConnect from "@/lib/dbConnect";
 import Blog from "@/models/Blog";
 
@@ -63,9 +64,9 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="absolute bottom-0 left-0 w-[40%] h-[60%] bg-indigo-600/10 blur-[120px] rounded-full pointer-events-none" />
 
           <div className="max-w-7xl w-full mx-auto px-6 py-20 md:py-32 relative z-20">
-            <div className={`flex flex-col lg:flex-row gap-16 lg:gap-24 items-center ${post.image ? 'lg:items-center text-center lg:text-left' : 'text-center'}`}>
-              <div className={`flex-1 w-full ${post.image ? 'max-w-2xl' : 'max-w-4xl mx-auto'}`}>
-                <nav aria-label="Breadcrumb" className={`text-sm text-zinc-400 mb-8 flex items-center gap-2 font-medium ${post.image ? 'justify-center lg:justify-start' : 'justify-center'}`}>
+            <div className={`flex flex-col lg:flex-row gap-16 lg:gap-24 items-center ${post.image && post.image.trim() !== "" ? 'lg:items-center text-center lg:text-left' : 'text-center'}`}>
+              <div className={`flex-1 w-full ${post.image && post.image.trim() !== "" ? 'max-w-2xl' : 'max-w-4xl mx-auto'}`}>
+                <nav aria-label="Breadcrumb" className={`text-sm text-zinc-400 mb-8 flex items-center gap-2 font-medium ${post.image && post.image.trim() !== "" ? 'justify-center lg:justify-start' : 'justify-center'}`}>
                   <Link href="/" className="hover:text-white transition-colors">Home</Link>
                   <span className="text-zinc-600">/</span>
                   <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
@@ -81,11 +82,11 @@ export default async function BlogPostPage({ params }: Props) {
                   {post.title}
                 </h1>
                 
-                <p className={`text-base md:text-lg text-zinc-400 font-medium leading-relaxed mb-10 ${post.image ? '' : 'mx-auto'}`}>
+                <p className={`text-base md:text-lg text-zinc-400 font-medium leading-relaxed mb-10 ${post.image && post.image.trim() !== "" ? '' : 'mx-auto'}`}>
                   {post.excerpt}
                 </p>
 
-                <div className={`flex items-center gap-6 text-[10px] sm:text-xs text-zinc-500 font-bold uppercase tracking-widest ${post.image ? 'justify-center lg:justify-start' : 'justify-center'}`}>
+                <div className={`flex items-center gap-6 text-[10px] sm:text-xs text-zinc-500 font-bold uppercase tracking-widest ${post.image && post.image.trim() !== "" ? 'justify-center lg:justify-start' : 'justify-center'}`}>
                   <div className="flex items-center gap-2">
                     <span className="w-6 h-[1px] bg-zinc-800"></span>
                     {formatDate(post.date)}
@@ -97,14 +98,15 @@ export default async function BlogPostPage({ params }: Props) {
                 </div>
               </div>
 
-              {post.image && (
+              {post.image && post.image.trim() !== "" && (
                 <div className="flex-1 w-full max-w-lg lg:mt-12 relative group">
                   <div className="absolute -inset-4 bg-gradient-to-tr from-purple-600/20 to-indigo-600/20 blur-3xl rounded-[3rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                   <div className="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl shadow-black/50 aspect-square sm:aspect-video lg:aspect-[4/5]">
-                    <img 
+                    <BlogImage 
                       src={post.image} 
                       alt={post.imageAlt || post.title} 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="w-full h-full object-cover group-hover:scale-105"
+                      grayscale={false}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0B0914] via-transparent to-transparent opacity-60"></div>
                   </div>
