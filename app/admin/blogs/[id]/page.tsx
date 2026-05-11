@@ -13,7 +13,12 @@ const ReactQuill = dynamic(
   async () => {
     const { default: RQ } = await import("react-quill-new");
     // eslint-disable-next-line react/display-name
-    return ({ forwardedRef, ...props }: any) => <RQ ref={forwardedRef} {...props} />;
+    return ({ forwardedRef, ...props }: { 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      forwardedRef: React.Ref<any> 
+    } & Record<string, unknown>) => (
+      <RQ ref={forwardedRef} {...props} />
+    );
   },
   { ssr: false }
 );
@@ -168,6 +173,20 @@ export default function BlogEditor({ params: paramsPromise }: { params: Promise<
     e.preventDefault();
     setSaving(true);
 
+    // Clean content: Fix word-breaking issues caused by non-breaking spaces
+    let cleanedContent = formData.content;
+    
+    // 1. CRITICAL: Replace non-breaking spaces with regular spaces to allow natural wrapping
+    // This fixes the "cut by alphabet" issue
+    cleanedContent = cleanedContent.replace(/\u00A0/g, " ");
+    cleanedContent = cleanedContent.replace(/&nbsp;/g, " ");
+
+    // 2. Fix missing spaces after punctuation (common in copy-pasted text)
+    cleanedContent = cleanedContent.replace(/([:!?.])([^\s<0-9])/g, "$1 $2");
+
+    // 3. (Optional) Cleanup any editor-only markers if they exist
+    cleanedContent = cleanedContent.replace(/<button[^>]*class="remove-table-btn"[^>]*>.*?<\/button>/g, "");
+
     try {
       const url = isNew ? "/api/blogs" : `/api/blogs/${params.id}`;
       const method = isNew ? "POST" : "PUT";
@@ -175,7 +194,7 @@ export default function BlogEditor({ params: paramsPromise }: { params: Promise<
       const res = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, content: cleanedContent }),
       });
 
       const result = await res.json();
