@@ -8,7 +8,15 @@ import dynamic from "next/dynamic";
 import "react-quill-new/dist/quill.snow.css";
 
 // Dynamically import react-quill-new to avoid SSR issues and React 19 compatibility
-const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
+// Dynamically import react-quill-new and wrap it to support forwardedRef
+const ReactQuill = dynamic(
+  async () => {
+    const { default: RQ } = await import("react-quill-new");
+    // eslint-disable-next-line react/display-name
+    return ({ forwardedRef, ...props }: any) => <RQ ref={forwardedRef} {...props} />;
+  },
+  { ssr: false }
+);
 
 export default function BlogEditor({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
   const params = use(paramsPromise);
@@ -18,7 +26,11 @@ export default function BlogEditor({ params: paramsPromise }: { params: Promise<
   const [loading, setLoading] = useState(!isNew);
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [showTablePicker, setShowTablePicker] = useState(false);
+  const [hoveredGrid, setHoveredGrid] = useState({ r: 0, c: 0 });
   const fileInputRef = useRef<HTMLInputElement>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const quillRef = useRef<any>(null);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -124,6 +136,34 @@ export default function BlogEditor({ params: paramsPromise }: { params: Promise<
     }
   };
 
+  const insertTable = (rows: number, cols: number) => {
+    if (!quillRef.current) return;
+    
+    const quill = quillRef.current.getEditor();
+    const range = quill.getSelection(true);
+    
+    // Create a simpler table structure for better Quill compatibility
+    let tableHtml = '<table border="1" style="width: 100%; border-collapse: collapse; margin: 20px 0;">';
+    for (let i = 0; i < rows; i++) {
+      tableHtml += '<tr>';
+      for (let j = 0; j < cols; j++) {
+        const text = i === 0 ? `Header ${j + 1}` : 'Data';
+        // Using td for all but styling the first row differently
+        if (i === 0) {
+          tableHtml += `<td style="background-color: #f8fafc; font-weight: bold; padding: 12px; border: 1px solid #e2e8f0;">${text}</td>`;
+        } else {
+          tableHtml += `<td style="padding: 12px; border: 1px solid #e2e8f0;">${text}</td>`;
+        }
+      }
+      tableHtml += '</tr>';
+    }
+    tableHtml += '</table><p><br></p>';
+
+    quill.clipboard.dangerouslyPasteHTML(range.index, tableHtml);
+    setShowTablePicker(false);
+    toast.success(`${rows}x${cols} Table inserted!`);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
@@ -171,6 +211,9 @@ export default function BlogEditor({ params: paramsPromise }: { params: Promise<
       ["link", "image"],
       ["clean"],
     ],
+    clipboard: {
+      matchVisual: false,
+    }
   };
 
   return (
@@ -178,7 +221,7 @@ export default function BlogEditor({ params: paramsPromise }: { params: Promise<
       <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-purple-600/20 blur-[150px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-600/20 blur-[150px] rounded-full pointer-events-none" />
 
-      <div className="max-w-4xl mx-auto relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-white/5 pb-6 mb-8 gap-6">
           <div>
             <h1 className="text-3xl font-bold tracking-tight text-white mb-2">
@@ -377,12 +420,68 @@ export default function BlogEditor({ params: paramsPromise }: { params: Promise<
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-indigo-200/80 mb-2">Content</label>
+              <div className="flex items-center justify-between mb-2">
+                <label className="block text-sm font-medium text-indigo-200/80">Content</label>
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setShowTablePicker(!showTablePicker)}
+                    className="flex items-center gap-2 px-6 py-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-sm font-semibold shadow-lg min-w-[160px] justify-center"
+                  >
+                    <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                    Insert Table
+                  </button>
+
+                  {showTablePicker && (
+                    <div className="absolute right-0 top-full mt-3 p-6 bg-[#161427] border border-white/10 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-50 animate-in fade-in slide-in-from-top-4 w-[360px]">
+                      <div className="text-xs font-black uppercase tracking-[0.2em] text-indigo-100 mb-5 text-center">
+                        Select Dimensions
+                        <div className="text-2xl mt-1 text-purple-400 font-black">
+                          {hoveredGrid.r} <span className="text-indigo-200/30">×</span> {hoveredGrid.c}
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-10 gap-2 bg-[#0B0914] p-4 rounded-2xl border border-white/5 shadow-inner">
+                        {Array.from({ length: 100 }).map((_, i) => {
+                          const r = Math.floor(i / 10) + 1;
+                          const c = (i % 10) + 1;
+                          const isActive = r <= hoveredGrid.r && c <= hoveredGrid.c;
+                          return (
+                            <div
+                              key={i}
+                              onMouseEnter={() => setHoveredGrid({ r, c })}
+                              onClick={() => insertTable(r, c)}
+                              className={`w-5 h-5 rounded-[4px] cursor-pointer transition-all border ${
+                                isActive 
+                                  ? "bg-gradient-to-br from-purple-500 to-indigo-600 border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.6)] scale-110 z-10" 
+                                  : "bg-white/10 border-white/5 hover:bg-white/20 hover:border-white/20"
+                              }`}
+                            />
+                          );
+                        })}
+                      </div>
+                      <div className="mt-6 flex justify-between items-center gap-4">
+                        <button 
+                          onClick={() => setShowTablePicker(false)}
+                          className="flex-1 py-2.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 hover:bg-red-500 hover:text-white transition-all text-xs font-bold uppercase tracking-widest text-center"
+                        >
+                          Cancel
+                        </button>
+                        <div className="px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-[10px] text-indigo-200/50 font-bold uppercase tracking-tighter">
+                          Max 10x10
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
               <div className="bg-white rounded-xl overflow-hidden text-black pb-12">
                 <ReactQuill 
+                  forwardedRef={quillRef}
                   theme="snow" 
                   value={formData.content} 
-                  onChange={(val) => setFormData({ ...formData, content: val })} 
+                  onChange={(val: string) => setFormData({ ...formData, content: val })} 
                   modules={quillModules}
                   className="h-96"
                 />
