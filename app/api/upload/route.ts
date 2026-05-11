@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { writeFile, mkdir } from "fs/promises";
-import path from "path";
-import crypto from "crypto";
+import { v2 as cloudinary } from "cloudinary";
+
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export async function POST(request: NextRequest) {
   try {
@@ -17,25 +22,20 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "File must be an image" }, { status: 400 });
     }
 
+    // Convert file to base64 for Cloudinary
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
+    const base64Image = `data:${file.type};base64,${buffer.toString("base64")}`;
 
-    // Create unique filename
-    const extension = path.extname(file.name);
-    const fileName = `${crypto.randomUUID()}${extension}`;
-    const uploadDir = path.join(process.cwd(), "public", "uploads");
+    // Upload to Cloudinary
+    const uploadResponse = await cloudinary.uploader.upload(base64Image, {
+      folder: "evander-blog",
+      resource_type: "auto",
+    });
 
-    // Ensure directory exists
-    await mkdir(uploadDir, { recursive: true });
-
-    const filePath = path.join(uploadDir, fileName);
-    await writeFile(filePath, buffer);
-
-    const fileUrl = `/uploads/${fileName}`;
-
-    return NextResponse.json({ url: fileUrl });
+    return NextResponse.json({ url: uploadResponse.secure_url });
   } catch (error) {
     console.error("Upload error:", error);
-    return NextResponse.json({ error: "Failed to upload image" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to upload image to cloud" }, { status: 500 });
   }
 }
