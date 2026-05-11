@@ -116,7 +116,7 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         </header>
 
-        <div className="w-full max-w-3xl mx-auto px-6 py-16 md:py-28 overflow-hidden break-words">
+        <div className="w-full max-w-3xl mx-auto px-6 py-16 md:py-28 overflow-hidden">
           <div 
             className="blog-content w-full"
             dangerouslySetInnerHTML={{ __html: post.content }}
