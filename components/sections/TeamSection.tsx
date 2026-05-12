@@ -36,6 +36,16 @@ const team = [
     image: "/team/riti.jpeg",
   },
   {
+    name: "Pravallika",
+    role: "Business Development Executive",
+    image: "/team/pravallika.jpeg",
+  },
+   {
+    name: "Vimala Varshini",
+    role: "Digital Marketing Executive",
+    image: "/team/varshini.jpeg",
+  },
+  {
     name: "Jitisha Bhutani",
     role: "Social Media Marketing Executive",
     image: "/team/Jitisha.jpeg",
