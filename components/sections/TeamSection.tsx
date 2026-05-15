@@ -66,11 +66,6 @@ const team = [
     image: "/team/samuel.jpeg",
   },
   {
-    name: "Adithi H.",
-    role: "Graphic Designer",
-    image: "/team/adithi.png",
-  },
-  {
     name: "Kesavarajaguru G. K.",
     role: "Video Editor",
     image: "/team/KRG.jpeg",
