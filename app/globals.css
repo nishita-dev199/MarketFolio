@@ -235,6 +235,21 @@ body {
   color: #4b5563;
 }
 
+.blog-content a,
+.ql-editor a {
+  color: #0ea5e9; /* Sky 500 */
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.blog-content a:hover,
+.ql-editor a:hover {
+  color: #0284c7; /* Sky 600 */
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 .blog-content img {
   border-radius: 1.5rem;
   margin: 2.5rem 0;
