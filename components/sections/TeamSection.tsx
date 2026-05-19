@@ -60,10 +60,20 @@ const team = [
     role: "CRM Executive",
     image: "/team/chandni.jpeg",
   },
+   {
+    name: "Archana Chandrashekar",
+    role: "CRM Executive",
+    image: "/team/archana.jpeg",
+  },
   {
     name: "Samuel",
     role: "Performance Marketing Executive",
     image: "/team/samuel.jpeg",
+  },
+   {
+    name: "Sundar Singh",
+    role: "Graphic Designer",
+    image: "/team/Sundar.jpeg",
   },
   {
     name: "Kesavarajaguru G. K.",
