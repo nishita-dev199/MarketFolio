@@ -242,7 +242,7 @@ export default async function BlogPostPage({ params }: Props) {
             <div className="w-full max-w-3xl mx-auto px-6 py-16 md:py-28 bg-background relative z-10">
               <div 
                 className="blog-content w-full"
-                dangerouslySetInnerHTML={{ __html: post.content }}
+                dangerouslySetInnerHTML={{ __html: cleanContent }}
               />
 
               <div className="mt-14 pt-10 border-t border-zinc-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
