@@ -17,13 +17,18 @@ const team = [
   },
   {
     name: "Nishita Namdeo",
-    role: "Web Developer",
+    role: "Senior Web Developer",
     image: "/team/nishita.png",
   },
   {
     name: "Ritika Srivastava",
     role: "Web Developer",
     image: "/team/ritika.jpeg",
+  },
+  {
+    name: "Tisha Mahato",
+    role: "Web Developer",
+    image: "/team/tisha.jpeg",
   },
   {
     name: "Josna Joshy",
@@ -40,7 +45,7 @@ const team = [
     role: "Business Development Executive",
     image: "/team/pravallika.jpeg",
   },
-   {
+  {
     name: "Vimala Varshini",
     role: "Digital Marketing Executive",
     image: "/team/varshini.jpeg",
@@ -60,7 +65,7 @@ const team = [
     role: "CRM Executive",
     image: "/team/chandni.jpeg",
   },
-   {
+  {
     name: "Archana Chandrashekar",
     role: "CRM Executive",
     image: "/team/archana.jpeg",
@@ -70,7 +75,7 @@ const team = [
     role: "Performance Marketing Executive",
     image: "/team/samuel.jpeg",
   },
-   {
+  {
     name: "Sundar Singh",
     role: "Graphic Designer",
     image: "/team/Sundar.jpeg",
@@ -98,17 +103,17 @@ export default function TeamSection() {
 
         <div className="flex flex-wrap justify-center gap-8 w-full">
           {team.map((member) => (
-            <div 
-              key={member.name} 
+            <div
+              key={member.name}
               className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.34rem)] float-lg rounded-[2.5rem] overflow-hidden bg-white teardrop-border group hover:scale-[1.05] transition-all duration-500 cursor-pointer relative aspect-[4/5]"
             >
               {/* Image */}
-              <img 
-                src={member.image} 
-                alt={member.name} 
+              <img
+                src={member.image}
+                alt={member.name}
                 className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
               />
-              
+
               {/* Overlay for Name and Designation */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-8 transition-all duration-500 group-hover:from-black/100">
                 <h3 className="text-2xl font-medium text-white mb-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
