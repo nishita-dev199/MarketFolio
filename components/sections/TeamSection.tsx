@@ -46,6 +46,11 @@ const team = [
     image: "/team/pravallika.jpeg",
   },
   {
+    name: "Samuel",
+    role: "Performance Marketing Executive",
+    image: "/team/samuel.jpeg",
+  },
+  {
     name: "Vimala Varshini",
     role: "Digital Marketing Executive",
     image: "/team/varshini.jpeg",
@@ -56,14 +61,14 @@ const team = [
     image: "/team/Jitisha.jpeg",
   },
   {
+    name: "Kushi Babel",
+    role: "Social Media Executive",
+    image: "/team/Kushi.jpeg",
+  },
+  {
     name: "Mehuli Debnath",
     role: "CRM Executive",
     image: "/team/mehuli.jpeg",
-  },
-  {
-    name: "Chandni Jha",
-    role: "CRM Executive",
-    image: "/team/chandni.jpeg",
   },
   {
     name: "Archana Chandrashekar",
@@ -71,20 +76,23 @@ const team = [
     image: "/team/archana.jpeg",
   },
   {
-    name: "Samuel",
-    role: "Performance Marketing Executive",
-    image: "/team/samuel.jpeg",
+    name: "Chandni Jha",
+    role: "CRM Executive",
+    image: "/team/chandni.jpeg",
+  },
+
+  {
+    name: "Kesavarajaguru G. K.",
+    role: "Video Editor",
+    image: "/team/KRG.jpeg",
   },
   {
     name: "Sundar Singh",
     role: "Graphic Designer",
     image: "/team/Sundar.jpeg",
   },
-  {
-    name: "Kesavarajaguru G. K.",
-    role: "Video Editor",
-    image: "/team/KRG.jpeg",
-  },
+
+  
 ];
 
 export default function TeamSection() {
