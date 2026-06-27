@@ -35,7 +35,7 @@ export default function WhyChooseSection() {
           The Competitive Edge
         </div>
         <h2 className="text-4xl md:text-6xl font-medium tracking-tighter text-black mb-16 text-center">
-          Why Choose Evander?
+          Why Choose MarketFolio?
         </h2>
 
         <div className="w-full space-y-4">

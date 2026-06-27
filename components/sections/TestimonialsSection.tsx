@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 const testimonials = [
   {
-    quote: "Evander completely transformed our digital presence. Within 6 months, our organic traffic doubled and our cost per acquisition dropped by 40%.",
+    quote: "MarketFolio completely transformed our digital presence. Within 6 months, our organic traffic doubled and our cost per acquisition dropped by 40%.",
     name: "Sarah Jenkins",
     role: "CMO at TechFlow",
   },
@@ -13,7 +13,7 @@ const testimonials = [
     role: "Founder of InnovateX",
   },
   {
-    quote: "The level of strategy and execution Evander brings to the table is rare. They didn't just run ads; they helped us fix our entire funnel. Our ROI has never been higher.",
+    quote: "The level of strategy and execution MarketFolio brings to the table is rare. They didn't just run ads; they helped us fix our entire funnel. Our ROI has never been higher.",
     name: "David Miller",
     role: "Director of Marketing at GlobalScale",
   },

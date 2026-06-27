@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Terms of Service| Evander Digital Marketing",
-  description: "Terms of Service for Evander Marketing Private Limited.",
+  title: "Terms of Service | MarketFolio",
+  description: "Terms of Service for MarketFolio.",
 };
 
 export default function TermsConditionsPage() {

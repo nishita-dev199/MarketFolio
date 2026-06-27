@@ -18,34 +18,34 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Evander Digital | Data-Driven Growth Agency",
-    template: "%s | Evander Digital"
+    default: "MarketFolio | Data-Driven Growth Agency",
+    template: "%s | MarketFolio"
   },
-  description: "Evander is a premium digital marketing agency specializing in algorithmic SEO, full-funnel paid media, and high-performance marketing systems designed to scale revenue.",
-  keywords: ["digital marketing agency", "performance marketing", "SEO services", "PPC management", "growth agency", "Evander Digital", "conversion rate optimization"],
-  authors: [{ name: "Evander Digital" }],
-  creator: "Evander Digital",
-  publisher: "Evander Digital",
+  description: "MarketFolio is a premium digital marketing agency specializing in algorithmic SEO, full-funnel paid media, and high-performance marketing systems designed to scale revenue.",
+  keywords: ["digital marketing agency", "performance marketing", "SEO services", "PPC management", "growth agency", "MarketFolio", "conversion rate optimization"],
+  authors: [{ name: "MarketFolio" }],
+  creator: "MarketFolio",
+  publisher: "MarketFolio",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://evanderdigital.com'),
+  metadataBase: new URL('https://marketfolio.com'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'Evander Digital | Data-Driven Growth Agency',
+    title: 'MarketFolio | Data-Driven Growth Agency',
     description: 'Engineering high-performance marketing systems that turn cold traffic into loyal customers.',
-    url: 'https://evanderdigital.com',
-    siteName: 'Evander Digital',
+    url: 'https://marketfolio.com',
+    siteName: 'MarketFolio',
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Evander Digital | Data-Driven Growth Agency',
+    title: 'MarketFolio | Data-Driven Growth Agency',
     description: 'Engineering high-performance marketing systems that turn cold traffic into loyal customers.',
   },
   robots: {

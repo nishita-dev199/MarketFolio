@@ -9,15 +9,8 @@ export default function Navbar() {
   return (
     <header className="w-full sticky top-0 z-50 pt-6 px-4 pb-2 bg-transparent">
       <div className="mx-auto max-w-7xl px-4 md:px-8 py-4 flex items-center justify-between float-md rounded-full bg-white teardrop-border relative">
-        <Link href="/" className="text-2xl font-black tracking-tighter text-black z-50 w-32">
-          <Image
-            src="/white_logo_crp.jpeg"
-            alt="Logo"
-            width={200}
-            height={80}
-            className="h-8 md:h-10 w-auto"
-            priority
-          />
+        <Link href="/" className="text-2xl font-black tracking-tighter text-black z-50">
+          MarketFolio
         </Link>
 
         {/* Desktop Navigation */}
