@@ -28,8 +28,8 @@ async function seed() {
         await mongoose.connect(uri);
         const User = mongoose.models.User || mongoose.model("User", userSchema);
         
-        const email = process.env.EMAIL_USER || "evanderfirm@gmail.com";
-        const password = "evanderadmin";
+        const email = process.env.EMAIL_USER || "contact@marketfolio.com";
+        const password = "marketfolioadmin";
         const hashedPassword = await bcrypt.hash(password, 10);
         
         const existingUser = await User.findOne({ email });

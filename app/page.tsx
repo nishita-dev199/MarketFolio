@@ -110,6 +110,10 @@ export default function Home() {
                       <span className="w-2 h-2 rounded-full bg-white shadow-[0_0_15px_rgba(255,255,255,0.8)] animate-pulse" />
                       Growing Startups
                     </span>
+                    <span className="text-xl md:text-xl font-medium text-white tracking-tighter flex items-center gap-6">
+                      <span className="w-2 h-2 rounded-full bg-white shadow-[0_0_15px_rgba(255,255,255,0.8)] animate-pulse" />
+                      Marketing Agencies
+                    </span>
                   </div>
                   {/* Duplicate set for looping */}
                   <div className="flex items-center gap-20 md:gap-40 px-10">
@@ -124,6 +128,10 @@ export default function Home() {
                     <span className="text-xl md:text-xl font-medium text-white tracking-tighter flex items-center gap-6">
                       <span className="w-2 h-2 rounded-full bg-white shadow-[0_0_15px_rgba(255,255,255,0.8)] animate-pulse" />
                       Growing Startups
+                    </span>
+                    <span className="text-xl md:text-xl font-medium text-white tracking-tighter flex items-center gap-6">
+                      <span className="w-2 h-2 rounded-full bg-white shadow-[0_0_15px_rgba(255,255,255,0.8)] animate-pulse" />
+                      Marketing Agencies
                     </span>
                   </div>
                 </div>

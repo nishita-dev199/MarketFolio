@@ -1,97 +1,51 @@
 
 const team = [
+ 
   {
-    name: "Tanushri Bagdi",
-    role: "CEO's Executive Assistant",
-    image: "/team/Tanushree.jpeg",
+    name: "K. K. Menon",
+    role: "Director",
+    image: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&w=600&q=80",
   },
   {
-    name: "Bhaveena P. B.",
+    name: " Sana Johnson",
     role: "Digital Marketing Manager",
-    image: "/team/Bhaveena.jpeg",
+    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80",
   },
   {
-    name: "Khushi Bajpai",
+    name: "Priya Bhawani",
     role: "Social Media Manager",
-    image: "/team/khushi.jpeg",
+    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
   },
   {
-    name: "Nishita Namdeo",
-    role: "Senior Web Developer",
-    image: "/team/nishita.png",
+    name: "Daniel Fernandes",
+    role: "Senior Fullstack Developer",
+    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80",
   },
   {
-    name: "Ritika Srivastava",
-    role: "Web Developer",
-    image: "/team/ritika.jpeg",
-  },
-  {
-    name: "Tisha Mahato",
-    role: "Web Developer",
-    image: "/team/tisha.jpeg",
-  },
-  {
-    name: "Josna Joshy",
+    name: "Anagha Menon",
     role: "SEO Executive",
-    image: "/team/Josna.png",
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80",
   },
   {
-    name: "Riti Shah",
-    role: "Business Development Executive",
-    image: "/team/riti.jpeg",
+    name: "Ashina Yadav",
+    role: "Content Writer",
+    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80",
   },
   {
-    name: "Pravallika",
-    role: "Business Development Executive",
-    image: "/team/pravallika.jpeg",
-  },
-  {
-    name: "Samuel",
-    role: "Performance Marketing Executive",
-    image: "/team/samuel.jpeg",
-  },
-  {
-    name: "Vimala Varshini",
-    role: "Digital Marketing Executive",
-    image: "/team/varshini.jpeg",
-  },
-  {
-    name: "Jitisha Bhutani",
-    role: "Social Media Marketing Executive",
-    image: "/team/Jitisha.jpeg",
-  },
-  {
-    name: "Kushi Babel",
+    name: "Sujithra K",
     role: "Social Media Executive",
-    image: "/team/Kushi.jpeg",
+    image: "https://images.unsplash.com/photo-1594744803329-e58b31de215f?auto=format&fit=crop&w=600&q=80",
   },
   {
-    name: "Mehuli Debnath",
-    role: "CRM Executive",
-    image: "/team/mehuli.jpeg",
+    name: "Ronaldo M. Jr.",
+    role: "Business Development Executive",
+    image: "https://images.unsplash.com/photo-1598550476439-6847785fce6e?auto=format&fit=crop&w=600&q=80",
   },
   {
-    name: "Archana Chandrashekar",
-    role: "CRM Executive",
-    image: "/team/archana.jpeg",
+    name: "Joe Keller",
+    role: "Performance Marketing Executive",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
   },
-  {
-    name: "Chandni Jha",
-    role: "CRM Executive",
-    image: "/team/chandni.jpeg",
-  },
-
-  {
-    name: "Kesavarajaguru G. K.",
-    role: "Video Editor",
-    image: "/team/KRG.jpeg",
-  },
-  {
-    name: "Sundar Singh",
-    role: "Graphic Designer",
-    image: "/team/Sundar.jpeg",
-  },
-
   
 ];
 

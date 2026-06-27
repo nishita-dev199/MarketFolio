@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
 
     // Upload to Cloudinary
     const uploadResponse = await cloudinary.uploader.upload(base64Image, {
-      folder: "evander-blog",
+      folder: "marketfolio-blog",
       resource_type: "auto",
     });
 

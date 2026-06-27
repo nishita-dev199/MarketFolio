@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: post.metaDescription || post.excerpt,
     keywords: post.keywords,
     openGraph: {
-      title: post.metaTitle || `${post.title} | Evander Digital`,
+      title: post.metaTitle || `${post.title} | MarketFolio`,
       description: post.metaDescription || post.excerpt,
       type: "article",
       publishedTime: post.date,
@@ -121,7 +121,7 @@ export default async function BlogPostPage({ params }: Props) {
                               </svg>
                             </div>
                           </div>
-                          <span className="text-sm font-bold text-black">Evander Team</span>
+                          <span className="text-sm font-bold text-black">MarketFolio Team</span>
                         </div>
                         <span className="w-1 h-1 rounded-full bg-zinc-300 hidden sm:block"></span>
                         <span className="text-xs sm:text-sm font-medium text-zinc-500">{formatDate(post.date)}</span>

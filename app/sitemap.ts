@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic'
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') ??
-  'https://evanderdigital.com'
+  'https://marketfolio.com'
 
 type SitemapEntry = {
   path: string
