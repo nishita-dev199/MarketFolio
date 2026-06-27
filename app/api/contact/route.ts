@@ -49,7 +49,7 @@ export async function POST(req: Request) {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: "[EMAIL_ADDRESS]",
-      subject: `New Inquiry from ${name} - Evander Website`,
+      subject: `New Inquiry from ${name} - MarketFolio Website`,
       html: `
         <div style="font-family: sans-serif; padding: 20px; color: #111;">
           <h2 style="border-bottom: 2px solid #000; padding-bottom: 10px;">New Inquiry Received</h2>
@@ -60,7 +60,7 @@ export async function POST(req: Request) {
             <p><strong>Message:</strong></p>
             <p style="white-space: pre-wrap;">${message}</p>
           </div>
-          <p style="margin-top: 30px; font-size: 12px; color: #888;">Sent from Evander Digital Marketing Website</p>
+          <p style="margin-top: 30px; font-size: 12px; color: #888;">Sent from MarketFolio Website</p>
         </div>
       `,
     };

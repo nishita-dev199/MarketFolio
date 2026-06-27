@@ -117,7 +117,7 @@ export default function CtaSection() {
                   </div>
                   <input 
                     type="text" 
-                    placeholder="John Doe"
+                    placeholder="Nishita Namdeo"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className={`w-full bg-zinc-900/50 border ${errors.name ? 'border-red-500/50' : 'border-zinc-800'} rounded-full px-6 py-4 text-white focus:outline-none focus:border-white transition-colors`}
@@ -130,7 +130,7 @@ export default function CtaSection() {
                   </div>
                   <input 
                     type="email" 
-                    placeholder="john@company.com"
+                    placeholder="nishita@company.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className={`w-full bg-zinc-900/50 border ${errors.email ? 'border-red-500/50' : 'border-zinc-800'} rounded-full px-6 py-4 text-white focus:outline-none focus:border-white transition-colors`}
@@ -207,10 +207,10 @@ export default function CtaSection() {
             <h4 className="text-xs font-bold uppercase text-zinc-500 mb-4 tracking-widest">Direct Contact</h4>
             <div className="space-y-4">
               <p className="text-lg text-white font-medium hover:text-zinc-300 transition-colors">
-                <a href="mailto:[EMAIL_ADDRESS]">contact@evanderdigital.com</a>
+                <a href="mailto:contact@marketfolio.com">contact@marketfolio.com</a>
               </p>
               <p className="text-lg text-white font-medium hover:text-zinc-300 transition-colors">
-                <a href="tel:+918438463105">+91 84384 63105</a>
+                <a href="tel:+919876543210">+91 9876543210</a>
               </p>
             </div>
           </div>
@@ -218,8 +218,8 @@ export default function CtaSection() {
           <div>
             <h4 className="text-xs font-bold uppercase text-zinc-500 mb-4 tracking-widest">Headquarters</h4>
             <p className="text-lg text-white font-medium leading-relaxed">
-              Bangalore<br />
-              Karnataka, India
+              123 Lane<br />
+              ABC, India
             </p>
           </div>
 

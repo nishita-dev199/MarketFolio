@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/private/',
     },
-    sitemap: 'https://evanderdigital.com/sitemap.xml',
+    sitemap: 'https://marketfolio.com/sitemap.xml',
   }
 }

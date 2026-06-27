@@ -9,7 +9,7 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "Admin Login",
       credentials: {
-        email: { label: "Email", type: "email", placeholder: "admin@evanderdigital.com" },
+        email: { label: "Email", type: "email", placeholder: "admin@marketfolio.com" },
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {

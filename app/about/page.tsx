@@ -7,7 +7,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About Us | Our Mission & Team",
-  description: "Learn about Evander Digital's mission to empower businesses through data-driven performance marketing. Meet the architects behind our scalable growth systems.",
+  description: "Learn about MarketFolio's mission to empower businesses through data-driven performance marketing. Meet the architects behind our scalable growth systems.",
 };
 
 export default function AboutPage() {
@@ -47,7 +47,7 @@ export default function AboutPage() {
         {/* Know Our Team Section */}
         <TeamSection />
 
-        {/* Why Choose Evander Section */}
+        {/* Why Choose MarketFolio Section */}
         <WhyChooseSection />
 
         {/* Final CTA Section */}

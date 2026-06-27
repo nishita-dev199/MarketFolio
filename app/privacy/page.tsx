@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Privacy Policy | Evander Digital Marketing",
-  description: "Privacy Policy for Evander Marketing Private Limited.",
+  title: "Privacy Policy | MarketFolio",
+  description: "Privacy Policy for MarketFolio.",
 };
 
 export default function PrivacyPolicyPage() {
@@ -19,7 +19,7 @@ export default function PrivacyPolicyPage() {
           
           <h1 className="text-5xl md:text-6xl font-black mb-8 tracking-tighter text-black">Privacy Policy</h1>
           <p className="text-xl font-medium text-zinc-600 mb-16 border-b border-zinc-100 pb-12 leading-relaxed">
-            At Evander Marketing Private Limited, we value your privacy and are committed to protecting your personal information.
+            At MarketFolio, we value your privacy and are committed to protecting your personal information.
           </p>
 
           <div className="space-y-12">
