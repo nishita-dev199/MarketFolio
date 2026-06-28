@@ -47,18 +47,18 @@ export default function Footer() {
         
         <div className="flex items-center gap-8">
           <div className="flex gap-6 items-center">
-             <a href="https://www.facebook.com/share/1B7oERZiC9/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors">
-              <FaFacebook className="w-5 h-5" />
-            </a>
-             <a href="https://www.youtube.com/@marketfolio" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors">
-              <FaYoutube className="w-5 h-5" />
-            </a>
-            <a href="https://www.instagram.com/marketfolio" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors">
-              <FaInstagram className="w-5 h-5" />
-            </a>
-            <a href="https://www.linkedin.com/company/marketfolio/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors">
+            <a href="https://www.linkedin.com/in/nishita-namdeo/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors">
               <FaLinkedin className="w-5 h-5" />
             </a>
+             <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors">
+              <FaFacebook className="w-5 h-5" />
+            </a>
+             <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors">
+              <FaYoutube className="w-5 h-5" />
+            </a>
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors">
+              <FaInstagram className="w-5 h-5" />
+            </a> 
           </div>
           <div className="h-4 w-px bg-zinc-800 hidden md:block"></div>
           <div className="flex gap-6">

@@ -34,12 +34,12 @@ const team = [
   {
     name: "Sujithra K",
     role: "Social Media Executive",
-    image: "https://images.unsplash.com/photo-1594744803329-e58b31de215f?auto=format&fit=crop&w=600&q=80",
+    image: "/team/sujithra.jpg",
   },
   {
     name: "Ronaldo M. Jr.",
     role: "Business Development Executive",
-    image: "https://images.unsplash.com/photo-1598550476439-6847785fce6e?auto=format&fit=crop&w=600&q=80",
+    image: "/team/ronaldo.jpg",
   },
   {
     name: "Joe Keller",

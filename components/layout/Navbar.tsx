@@ -2,9 +2,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { SERVICES } from "@/lib/content/services";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
 
   return (
     <header className="w-full sticky top-0 z-50 pt-6 px-4 pb-2 bg-transparent">
@@ -16,7 +18,20 @@ export default function Navbar() {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex gap-2 font-medium">
           <Link href="/" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all">Home</Link>
-          <Link href="/#services" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all">Services</Link>
+          
+          <div className="relative group">
+            <Link href="/#services" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all inline-block">Services</Link>
+            <div className="absolute top-full pt-4 left-1/2 -translate-x-1/2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+              <div className="w-56 bg-white border border-zinc-200 rounded-2xl shadow-xl flex flex-col p-2">
+                {SERVICES.map((service) => (
+                  <Link key={service.slug} href={`/services/${service.slug}`} className="px-4 py-3 text-sm text-zinc-500 hover:text-black hover:bg-zinc-50 rounded-xl transition-colors font-medium">
+                    {service.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
           <Link href="/blog" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all">Blog</Link>
           <Link href="/about" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all">About Us</Link>
           <Link href="/#contact" className="px-6 py-2 rounded-full text-zinc-500 hover:text-black hover:float-pressed transition-all">Contact</Link>
@@ -50,13 +65,28 @@ export default function Navbar() {
             >
               Home
             </Link>
-            <Link 
-              href="/#services" 
-              onClick={() => setIsOpen(false)}
-              className="text-3xl font-black text-zinc-400 hover:text-black transition-colors"
-            >
-              Services
-            </Link>
+            <div className="flex flex-col items-center w-full">
+              <button 
+                onClick={() => setIsServicesOpen(!isServicesOpen)}
+                className="flex items-center gap-2 text-3xl font-black text-zinc-400 hover:text-black transition-colors"
+              >
+                Services
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" className={`w-6 h-6 transition-transform duration-300 ${isServicesOpen ? "rotate-180" : ""}`}><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              
+              <div className={`flex flex-col items-center overflow-hidden transition-all duration-300 w-full ${isServicesOpen ? "max-h-96 opacity-100 mt-6 gap-5" : "max-h-0 opacity-0"}`}>
+                {SERVICES.map((service) => (
+                  <Link 
+                    key={service.slug} 
+                    href={`/services/${service.slug}`} 
+                    onClick={() => { setIsOpen(false); setIsServicesOpen(false); }}
+                    className="text-xl font-black text-zinc-400 hover:text-black transition-colors"
+                  >
+                    {service.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
             <Link 
               href="/blog" 
               onClick={() => setIsOpen(false)}
