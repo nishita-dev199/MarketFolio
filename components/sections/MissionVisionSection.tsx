@@ -22,12 +22,12 @@ export default function MissionVisionSection() {
           <div className="w-full md:w-2/5 flex justify-end relative z-20">
             <div className="float-lg rounded-[2.5rem] overflow-hidden bg-white teardrop-border w-64 md:w-80 group hover:-translate-y-4 transition-all duration-700 relative aspect-[3/4]">
               <img 
-                src="/team/sabareesh.jpeg" 
-                alt="CEO - Sabareesh Sankar" 
+                src="/team/ceo.jpg" 
+                alt="CEO - Aarti Ahuja" 
                 className="absolute inset-0 w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-8">
-                <h3 className="text-2xl font-medium text-white mb-1">Sabareesh Sankar</h3>
+                <h3 className="text-2xl font-medium text-white mb-1">Aarti Ahuja</h3>
                 <p className="text-xs font-bold text-zinc-400 uppercase tracking-[0.2em]">CEO</p>
               </div>
             </div>
@@ -60,12 +60,12 @@ export default function MissionVisionSection() {
           <div className="w-full md:w-2/5 flex justify-start relative z-20">
             <div className="float-lg rounded-[2.5rem] overflow-hidden bg-white teardrop-border w-64 md:w-80 group hover:-translate-y-4 transition-all duration-700 relative aspect-[3/4]">
               <img 
-                src="/team/pavithra.png" 
-                alt="Founder - Pavithra S." 
+                src="/team/founder.jpg" 
+                alt="Founder - Neelam Saxena" 
                 className="absolute inset-0 w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-8">
-                <h3 className="text-2xl font-medium text-white mb-1">Pavithra S.</h3>
+                <h3 className="text-2xl font-medium text-white mb-1">Neelam Saxena</h3>
                 <p className="text-xs font-bold text-zinc-400 uppercase tracking-[0.2em]">Founder</p>
               </div>
             </div>
